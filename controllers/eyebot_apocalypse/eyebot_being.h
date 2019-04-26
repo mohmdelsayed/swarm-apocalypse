@@ -135,6 +135,8 @@ private:
 
    bool SearchForInfected();
 
+   bool SearchForMedicSignal();
+   
    void PublishHealthState(int);
    void Die();
    void MainBehavior();
@@ -150,10 +152,15 @@ private:
 
    /* Current robot health state */
    enum HState {
-      STATE_HEALTHY = 1,
+      STATE_HEALTHY = 0,
       STATE_INFECTED,
-      STATE_CURING,
       STATE_DEAD
+   };
+
+   /* Current robot infected state */
+   enum IState {
+      STATE_CURING = 0,
+      STATE_CURED
    };
 
 private:

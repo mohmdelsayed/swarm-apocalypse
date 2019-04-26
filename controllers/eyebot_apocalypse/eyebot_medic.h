@@ -156,11 +156,17 @@ private:
 
    /* Current robot health state */
    enum HState {
-      STATE_HEALTHY = 1,
+      STATE_HEALTHY = 0,
       STATE_INFECTED,
-      STATE_CURING,
       STATE_DEAD
    };
+
+   /* Current robot infected state */
+   enum IState {
+      STATE_CURING = 0,
+      STATE_CURED
+   };
+
 private:
 
    /* Pointer to the quadrotor position actuator */
@@ -181,12 +187,13 @@ private:
    EState m_eState;
    /* Current medic state */
    MState m_MState;
-
+   /* Current infected state */
+   IState m_IState;
    /* Curing Distance */
-   Real CuringDistance = 150;
+   Real CuringDistance = 500;
 
    /* Curing Time */
-   Real CuringTime = 150;
+   Real CuringTime = 50;
 
    /* Curing Time */
    Real TotalCuringTime;

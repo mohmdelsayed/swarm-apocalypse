@@ -249,16 +249,17 @@ CVector2 CEyeBotMedic::FlockingVector() {
 void CEyeBotMedic::CuringBehavior() {
 
    m_pcRABAct->SetData(2, STATE_BUSY);
-   TotalCuringTime += 1;
-   if (TotalCuringTime>CuringTime){
-      LOGERR << "You are cured" << std::endl;
-      m_pcRABAct->SetData(3, 1); /// <=============== Implement the reception of the messaage at the infected side
+   LOGERR << "curing time is " << TotalCuringTime << std::endl;
+   
 
-      AdvertisingBehavior();
-   } else {
+   while(TotalCuringTime<CuringTime){
       LOGERR << "You are being cured" << std::endl;
+      m_pcRABAct->SetData(3, STATE_CURING);
+      TotalCuringTime = TotalCuringTime + 1;
    }
+   m_pcRABAct->SetData(3, STATE_CURED);
 
+   
    //m_pcLEDs->SetAllColors(CColor::WHITE);
 
 }

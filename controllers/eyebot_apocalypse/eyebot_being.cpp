@@ -14,14 +14,17 @@ static const Real POSITIONING_TOLERANCE = 0.01f;
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode& t_node) {
-   try {
+void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode &t_node)
+{
+   try
+   {
       GetNodeAttribute(t_node, "target_distance", TargetDistance);
       GetNodeAttribute(t_node, "gain", Gain);
       GetNodeAttribute(t_node, "exponent", Exponent);
       GetNodeAttribute(t_node, "max_interaction", MaxInteraction);
    }
-   catch(CARGoSException& ex) {
+   catch (CARGoSException &ex)
+   {
       THROW_ARGOSEXCEPTION_NESTED("Error initializing controller flocking parameters.", ex);
    }
 }
@@ -32,7 +35,8 @@ void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode& t_node) 
 /*
  * This function is a generalization of the Lennard-Jones potential
  */
-Real CEyeBotBeing::SFlockingInteractionParams::GeneralizedLennardJones(Real f_distance) {
+Real CEyeBotBeing::SFlockingInteractionParams::GeneralizedLennardJones(Real f_distance)
+{
    Real fNormDistExp = ::pow(TargetDistance / f_distance, Exponent);
    return -Gain / f_distance * (fNormDistExp * fNormDistExp - fNormDistExp);
 }
@@ -40,17 +44,17 @@ Real CEyeBotBeing::SFlockingInteractionParams::GeneralizedLennardJones(Real f_di
 /****************************************/
 /****************************************/
 
-CEyeBotBeing::CEyeBotBeing() :
-   m_pcPosAct(NULL),
-   m_pcRABAct(NULL),
-   m_pcRABSens(NULL),
-   m_pcRNG(NULL),
-   m_pcLightSens(NULL) {}
+CEyeBotBeing::CEyeBotBeing() : m_pcPosAct(NULL),
+                               m_pcRABAct(NULL),
+                               m_pcRABSens(NULL),
+                               m_pcRNG(NULL),
+                               m_pcLightSens(NULL) {}
 
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::Init(TConfigurationNode& t_node) {
+void CEyeBotBeing::Init(TConfigurationNode &t_node)
+{
    /*
     * Get sensor/actuator handles
     *
@@ -72,21 +76,23 @@ void CEyeBotBeing::Init(TConfigurationNode& t_node) {
     *       <controllers><eyebot_diffusion><sensors> sections. If you forgot to
     *       list a device in the XML and then you request it here, an error occurs.
     */
-   m_pcPosAct    = GetActuator<CCI_QuadRotorPositionActuator>("quadrotor_position");
-   m_pcRABAct    = GetActuator<CCI_RangeAndBearingActuator  >("range_and_bearing" );
-   m_pcRABSens   = GetSensor  <CCI_RangeAndBearingSensor    >("range_and_bearing" );
-   m_pcLightSens = GetSensor  <CCI_EyeBotLightSensor        >("eyebot_light"      );
-   m_pcPosSens   = GetSensor  <CCI_PositioningSensor        >("positioning"       );
+   m_pcPosAct = GetActuator<CCI_QuadRotorPositionActuator>("quadrotor_position");
+   m_pcRABAct = GetActuator<CCI_RangeAndBearingActuator>("range_and_bearing");
+   m_pcRABSens = GetSensor<CCI_RangeAndBearingSensor>("range_and_bearing");
+   m_pcLightSens = GetSensor<CCI_EyeBotLightSensor>("eyebot_light");
+   m_pcPosSens = GetSensor<CCI_PositioningSensor>("positioning");
    m_pcRNG = CRandom::CreateRNG("argos");
 
    /*
     * Parse the config file
     */
-   try {
+   try
+   {
       /* Flocking-related */
       m_sFlockingParams.Init(GetNode(t_node, "flocking"));
    }
-   catch(CARGoSException& ex) {
+   catch (CARGoSException &ex)
+   {
       THROW_ARGOSEXCEPTION_NESTED("Error parsing the controller parameters.", ex);
    }
    /* Perform further initialization */
@@ -96,58 +102,66 @@ void CEyeBotBeing::Init(TConfigurationNode& t_node) {
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::Reset() {
+void CEyeBotBeing::Reset()
+{
    /* Switch to state start */
    m_eState = STATE_START;
    /* Tell robots around that this robot is starting */
    m_pcRABAct->SetData(0, STATE_START);
    InfectionTime = 0;
 
-   Real r = m_pcRNG-> Uniform(CRange<Real>(-1, 1));
+   Real r = m_pcRNG->Uniform(CRange<Real>(-1, 1));
 
-   if (r > -0.5){
+   if (r > 0)
+   {
       m_HState = STATE_HEALTHY;
    }
-   else {
+   else
+   {
       m_HState = STATE_INFECTED;
    }
-
 }
 
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::ControlStep() {
-   switch(m_eState) {
-      case STATE_START:
-         TakeOff();
-         break;
-      case STATE_TAKE_OFF:
-         TakeOff();
-         break;
-      case STATE_FLOCK:
-         MainBehavior();
-         break;
-      default:
-         LOGERR << "[BUG] Unknown robot state: " << m_eState << std::endl;
+void CEyeBotBeing::ControlStep()
+{
+   switch (m_eState)
+   {
+   case STATE_START:
+      TakeOff();
+      break;
+   case STATE_TAKE_OFF:
+      TakeOff();
+      break;
+   case STATE_FLOCK:
+      MainBehavior();
+      break;
+   default:
+      LOGERR << "[BUG] Unknown robot state: " << m_eState << std::endl;
    }
 }
 
-void CEyeBotBeing::MainBehavior() {
+void CEyeBotBeing::MainBehavior()
+{
 
-   if (m_HState == STATE_HEALTHY){
+   if (m_HState == STATE_HEALTHY)
+   {
       HealthyBehavior();
    }
-   else {
+   else
+   {
       InfectedBehavior();
    }
-
 }
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::TakeOff() {
-   if(m_eState != STATE_TAKE_OFF) {
+void CEyeBotBeing::TakeOff()
+{
+   if (m_eState != STATE_TAKE_OFF)
+   {
       /* Switch to state take off */
       m_eState = STATE_TAKE_OFF;
       /* Set the target position on the vertical of the current position */
@@ -157,7 +171,8 @@ void CEyeBotBeing::TakeOff() {
       /* Tell robots around that this eye-bot is taking off */
       m_pcRABAct->SetData(0, STATE_TAKE_OFF);
    }
-   if(Distance(m_cTargetPos, m_pcPosSens->GetReading().Position) < POSITIONING_TOLERANCE) {
+   if (Distance(m_cTargetPos, m_pcPosSens->GetReading().Position) < POSITIONING_TOLERANCE)
+   {
       /* State transition */
       Flock();
    }
@@ -166,8 +181,10 @@ void CEyeBotBeing::TakeOff() {
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::Flock() {
-   if(m_eState != STATE_FLOCK) {
+void CEyeBotBeing::Flock()
+{
+   if (m_eState != STATE_FLOCK)
+   {
       /* Switch to state flock */
       m_eState = STATE_FLOCK;
       /* Tell robots around that this robot is ready to flock */
@@ -175,23 +192,26 @@ void CEyeBotBeing::Flock() {
    }
    CVector2 cDirection = VectorToLight() + FlockingVector();
    m_pcPosAct->SetRelativePosition(
-      CVector3(cDirection.GetX(),
-               cDirection.GetY(),
-               0.0f));
+       CVector3(cDirection.GetX(),
+                cDirection.GetY(),
+                0.0f));
 }
 
 /****************************************/
 /****************************************/
 
-CVector2 CEyeBotBeing::VectorToLight() {
+CVector2 CEyeBotBeing::VectorToLight()
+{
    /* Get light readings */
-   const CCI_EyeBotLightSensor::TReadings& tReadings = m_pcLightSens->GetReadings();
+   const CCI_EyeBotLightSensor::TReadings &tReadings = m_pcLightSens->GetReadings();
    /* Calculate a normalized vector that points to the closest light */
    CVector2 cAccum;
-   for(size_t i = 0; i < tReadings.size(); ++i) {
+   for (size_t i = 0; i < tReadings.size(); ++i)
+   {
       cAccum += CVector2(tReadings[i].Value, tReadings[i].Angle);
    }
-   if(cAccum.Length() > 0.0f) {
+   if (cAccum.Length() > 0.0f)
+   {
       /* Make the vector long as 1/10 of the max speed */
       cAccum.Normalize();
       cAccum *= 0.1f * m_sFlockingParams.MaxInteraction;
@@ -202,22 +222,26 @@ CVector2 CEyeBotBeing::VectorToLight() {
 /****************************************/
 /****************************************/
 
-CVector2 CEyeBotBeing::FlockingVector() {
+CVector2 CEyeBotBeing::FlockingVector()
+{
    /* Get RAB messages from nearby eye-bots */
-   const CCI_RangeAndBearingSensor::TReadings& tMsgs = m_pcRABSens->GetReadings();
+   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
    /* Go through them to calculate the flocking interaction vector */
-   if(! tMsgs.empty()) {
+   if (!tMsgs.empty())
+   {
       /* This will contain the final interaction vector */
       CVector2 cAccum;
       /* Used to calculate the vector length of each neighbor's contribution */
       Real fLJ;
       /* A counter for the neighbors in state flock */
       UInt32 unPeers = 0;
-      for(size_t i = 0; i < tMsgs.size(); ++i) {
+      for (size_t i = 0; i < tMsgs.size(); ++i)
+      {
          /*
           * We consider only the neighbors in state flock
           */
-         if(tMsgs[i].Data[0] == STATE_FLOCK) {
+         if (tMsgs[i].Data[0] == STATE_FLOCK)
+         {
             /*
              * Take the message sender range and horizontal bearing
              * With the range, calculate the Lennard-Jones interaction force
@@ -233,11 +257,13 @@ CVector2 CEyeBotBeing::FlockingVector() {
             ++unPeers;
          }
       }
-      if(unPeers > 0) {
+      if (unPeers > 0)
+      {
          /* Divide the accumulator by the number of flocking neighbors */
          cAccum /= unPeers;
          /* Limit the interaction force */
-         if(cAccum.Length() > m_sFlockingParams.MaxInteraction) {
+         if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
+         {
             cAccum.Normalize();
             cAccum *= m_sFlockingParams.MaxInteraction;
          }
@@ -245,7 +271,8 @@ CVector2 CEyeBotBeing::FlockingVector() {
       /* All done */
       return cAccum;
    }
-   else {
+   else
+   {
       /* No messages received, no interaction */
       return CVector2();
    }
@@ -254,78 +281,117 @@ CVector2 CEyeBotBeing::FlockingVector() {
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::InfectedBehavior() {
+void CEyeBotBeing::InfectedBehavior()
+{
+   LOG << SearchForMedicSignal() << std::endl;
+   if (SearchForMedicSignal())
+   {
+      LOGERR << "I am cured! Thank you!";
+      m_pcRABAct->SetData(1, STATE_HEALTHY);
+      HealthyBehavior();
+   }
 
-   if(InfectionTime < InfectionStart){
-      LOGERR << "I am Healthy!" << std::endl;
+   if (InfectionTime < InfectionStart)
+   {
+      LOGERR << "I think I am Healthy but I am not!" << std::endl;
       //m_HState = STATE_HEALTHY;  <=========================== Horrible mistake
       m_pcRABAct->SetData(1, STATE_HEALTHY);
       Flock();
    }
 
-   if(InfectionTime > InfectionStart && InfectionTime < InfectionTerminal){
+   if (InfectionTime > InfectionStart && InfectionTime < InfectionTerminal)
+   {
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
       Flock();
    }
 
-
-   if(InfectionTime > InfectionTerminal){
+   if (InfectionTime > InfectionTerminal)
+   {
       LOGERR << "I am Dead!" << std::endl;
       m_HState = STATE_DEAD;
       m_pcRABAct->SetData(1, STATE_DEAD);
       Die();
    }
-
    InfectionTime += 1;
 }
 
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::HealthyBehavior() {
-
-   LOGERR << "I am Healthy!" << std::endl;
-   m_HState = STATE_HEALTHY;
-   m_pcRABAct->SetData(1, STATE_HEALTHY);
-
-   if(SearchForInfected()){
-      /**********************************************************************
-       * ******************* ERROOOOOOOOOOOOOOOOR ***************************
-       * ********************************************************************/
-      LOGERR << "Opps, got infected!" << std::endl;
-      m_HState = STATE_INFECTED;
-      InfectionTime = 0;
-      InfectedBehavior();
-   }
-   else {
-      Flock();
-   }
-
-}
-
-/****************************************/
-/****************************************/
-
-bool CEyeBotBeing::SearchForInfected() {
-
-
+bool CEyeBotBeing::SearchForMedicSignal()
+{
    /* Get RAB messages from nearby eye-bots */
-   const CCI_RangeAndBearingSensor::TReadings& tMsgs = m_pcRABSens->GetReadings();
+   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
    /* Go through them to calculate the flocking interaction vector */
-   if(! tMsgs.empty()) {
+   if (!tMsgs.empty())
+   {
 
-      for(size_t i = 0; i < tMsgs.size(); ++i) {
+      for (size_t i = 0; i < tMsgs.size(); ++i)
+      {
          /*
           * We consider only the neighbors in state flock
           */
          //LOGERR << "Data is " << tMsgs[i].Range << std::endl;
 
-         
-         if(tMsgs[i].Data[1] == STATE_INFECTED) {         
-            if(tMsgs[i].Range < InfectionDistance) {
-               return true;;
+         //LOGERR << tMsgs[i].Data[3] << std::endl;
+         if (tMsgs[i].Data[3] == STATE_CURED)
+         {
+            return true;
+         }
+      }
+   }
+   return false;
+}
+
+/****************************************/
+/****************************************/
+
+void CEyeBotBeing::HealthyBehavior()
+{
+
+   LOGERR << "I am Healthy!" << std::endl;
+   m_HState = STATE_HEALTHY;
+   m_pcRABAct->SetData(1, STATE_HEALTHY);
+
+   if (SearchForInfected())
+   {
+      LOGERR << "Opps, got infected!" << std::endl;
+      m_HState = STATE_INFECTED;
+      InfectionTime = 0;
+      InfectedBehavior();
+   }
+   else
+   {
+      Flock();
+   }
+}
+
+/****************************************/
+/****************************************/
+
+bool CEyeBotBeing::SearchForInfected()
+{
+
+   /* Get RAB messages from nearby eye-bots */
+   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
+   /* Go through them to calculate the flocking interaction vector */
+   if (!tMsgs.empty())
+   {
+
+      for (size_t i = 0; i < tMsgs.size(); ++i)
+      {
+         /*
+          * We consider only the neighbors in state flock
+          */
+         //LOGERR << "Data is " << tMsgs[i].Range << std::endl;
+
+         if (tMsgs[i].Data[1] == STATE_INFECTED)
+         {
+            if (tMsgs[i].Range < InfectionDistance)
+            {
+               return true;
             }
          }
       }
@@ -333,16 +399,17 @@ bool CEyeBotBeing::SearchForInfected() {
    return false;
 }
 
-
-void CEyeBotBeing::PublishHealthState(int myHealth){
-// TODO
+void CEyeBotBeing::PublishHealthState(int myHealth)
+{
+   // TODO
 }
 
-void CEyeBotBeing::Die(){
+void CEyeBotBeing::Die()
+{
    m_pcPosAct->SetRelativePosition(
-      CVector3(0.0f,
-               0.0f,
-               0.0f));
+       CVector3(0.0f,
+                0.0f,
+                0.0f));
 }
 
 /*

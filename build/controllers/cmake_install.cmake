@@ -1,4 +1,4 @@
-# Install script for directory: /home/mohamed/argos3-examples/controllers
+# Install script for directory: /home/mohamed/swarm-apocalypse/controllers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/mohamed/argos3-examples/build/controllers/eyebot_circle/cmake_install.cmake")
-  include("/home/mohamed/argos3-examples/build/controllers/eyebot_flocking/cmake_install.cmake")
-  include("/home/mohamed/argos3-examples/build/controllers/eyebot_apocalypse/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/controllers/eyebot_circle/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/cmake_install.cmake")
 
 endif()
 

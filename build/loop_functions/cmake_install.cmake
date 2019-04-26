@@ -1,4 +1,4 @@
-# Install script for directory: /home/mohamed/argos3-examples/loop_functions
+# Install script for directory: /home/mohamed/swarm-apocalypse/loop_functions
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

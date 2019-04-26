@@ -1,4 +1,4 @@
-# Install script for directory: /home/mohamed/argos3-examples/embedding
+# Install script for directory: /home/mohamed/swarm-apocalypse/embedding
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

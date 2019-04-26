@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/mohamed/argos3-examples/build/controllers/eyebot_flocking/eyebot_flocking_automoc.cpp
+/home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/eyebot_flocking_automoc.cpp
 
-/home/mohamed/argos3-examples/controllers/eyebot_flocking/eyebot_flocking.cpp
+/home/mohamed/swarm-apocalypse/controllers/eyebot_flocking/eyebot_flocking.cpp
 eyebot_flocking.h
-/home/mohamed/argos3-examples/controllers/eyebot_flocking/eyebot_flocking.h
+/home/mohamed/swarm-apocalypse/controllers/eyebot_flocking/eyebot_flocking.h
 argos3/core/utility/configuration/argos_configuration.h
 -
 argos3/core/utility/logging/argos_log.h
 -
 
-/home/mohamed/argos3-examples/controllers/eyebot_flocking/eyebot_flocking.h
+/home/mohamed/swarm-apocalypse/controllers/eyebot_flocking/eyebot_flocking.h
 argos3/core/control_interface/ci_controller.h
 -
 argos3/plugins/robots/generic/control_interface/ci_quadrotor_position_actuator.h

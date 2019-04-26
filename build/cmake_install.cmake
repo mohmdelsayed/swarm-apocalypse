@@ -1,4 +1,4 @@
-# Install script for directory: /home/mohamed/argos3-examples
+# Install script for directory: /home/mohamed/swarm-apocalypse
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/mohamed/argos3-examples/build/controllers/cmake_install.cmake")
-  include("/home/mohamed/argos3-examples/build/loop_functions/cmake_install.cmake")
-  include("/home/mohamed/argos3-examples/build/embedding/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/controllers/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/loop_functions/cmake_install.cmake")
+  include("/home/mohamed/swarm-apocalypse/build/embedding/cmake_install.cmake")
 
 endif()
 
@@ -48,5 +48,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/mohamed/argos3-examples/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/mohamed/swarm-apocalypse/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

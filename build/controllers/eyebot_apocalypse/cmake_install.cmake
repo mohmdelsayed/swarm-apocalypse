@@ -1,4 +1,4 @@
-# Install script for directory: /home/mohamed/argos3-examples/controllers/eyebot_apocalypse
+# Install script for directory: /home/mohamed/swarm-apocalypse/controllers/eyebot_apocalypse
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

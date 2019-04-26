@@ -6,5 +6,5 @@ CXX_FLAGS = -g -fPIC   -std=gnu++14
 
 CXX_DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -Deyebot_being_EXPORTS
 
-CXX_INCLUDES = -I/home/mohamed/argos3-examples/build/controllers/eyebot_apocalypse -I/home/mohamed/argos3-examples/controllers/eyebot_apocalypse -I/home/mohamed/anaconda2/include/qt -I/home/mohamed/anaconda2/include/qt/QtWidgets -I/home/mohamed/anaconda2/include/qt/QtGui -I/home/mohamed/anaconda2/include/qt/QtCore -I/home/mohamed/anaconda2/./mkspecs/linux-g++ -I/home/mohamed/argos3-examples -I/usr/include/lua5.2 -I/home/mohamed/argos3-examples/controllers 
+CXX_INCLUDES = -I/home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse -I/home/mohamed/swarm-apocalypse/controllers/eyebot_apocalypse -I/home/mohamed/anaconda3/include/qt -I/home/mohamed/anaconda3/include/qt/QtWidgets -I/home/mohamed/anaconda3/include/qt/QtGui -I/home/mohamed/anaconda3/include/qt/QtCore -I/home/mohamed/anaconda3/./mkspecs/linux-g++ -I/home/mohamed/swarm-apocalypse -I/usr/include/lua5.2 -I/home/mohamed/swarm-apocalypse/controllers 
 
