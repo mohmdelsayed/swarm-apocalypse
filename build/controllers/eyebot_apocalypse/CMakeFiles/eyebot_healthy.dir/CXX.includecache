@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mohamed/argos3-examples/build/controllers/eyebot_apocalypse/eyebot_healthy_automoc.cpp
+
+/home/mohamed/argos3-examples/controllers/eyebot_apocalypse/eyebot_healthy.cpp
+eyebot_healthy.h
+/home/mohamed/argos3-examples/controllers/eyebot_apocalypse/eyebot_healthy.h
+argos3/core/utility/configuration/argos_configuration.h
+-
+argos3/core/utility/logging/argos_log.h
+-
+
+/home/mohamed/argos3-examples/controllers/eyebot_apocalypse/eyebot_healthy.h
+argos3/core/control_interface/ci_controller.h
+-
+argos3/plugins/robots/generic/control_interface/ci_quadrotor_position_actuator.h
+-
+argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h
+-
+argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h
+-
+argos3/plugins/robots/eye-bot/control_interface/ci_eyebot_light_sensor.h
+-
+argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h
+-
+argos3/core/utility/math/vector2.h
+-
+
