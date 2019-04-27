@@ -36,9 +36,6 @@ void CEyeBotMedic::SApocalypseParams::Init(TConfigurationNode &t_node)
 {
    try
    {
-      GetNodeAttribute(t_node, "InfectionStart", InfectionStart);
-      GetNodeAttribute(t_node, "InfectionTerminal", InfectionTerminal);
-      GetNodeAttribute(t_node, "InfectionDistance", InfectionDistance);
       GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
    }

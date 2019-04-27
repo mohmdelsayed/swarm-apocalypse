@@ -77,6 +77,7 @@ public:
       Real InfectionDistance;
       Real CuringDistance;
       Real CuringTime;
+      Real InfectionPercentage;
 
       void Init(TConfigurationNode &t_node);
    };

@@ -30,10 +30,7 @@
                   gain="25"
                   exponent="1.5"
                   max_interaction="0.2" />
-        <apocalypse InfectionStart="100"
-                  InfectionTerminal="150"
-                  InfectionDistance="100"
-                  CuringDistance="100" 
+        <apocalypse CuringDistance="100" 
                   CuringTime="100"   />
 
       </params>
@@ -51,11 +48,10 @@
         <eyebot_light implementation="rot_z_only" show_rays="true" />
       </sensors>
       <params>
-        <apocalypse InfectionStart="20"
+        <apocalypse InfectionPercentage="0.5"
+                  InfectionStart="20"
                   InfectionTerminal="500"
-                  InfectionDistance="100"
-                  CuringDistance="100" 
-                  CuringTime="100"   />
+                  InfectionDistance="100" />
         <flocking target_distance="100"
                   gain="25"
                   exponent="1.5"
@@ -117,9 +113,7 @@
       </camera>
     </qt-opengl>
 
-    <!-- <qt-opengl>
-      <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
-                      label="id_qtuser_functions" />
-    </qt-opengl> -->
+      <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
+                      label="id_qtuser_functions" /> -->
   </visualization>
 </argos-configuration>

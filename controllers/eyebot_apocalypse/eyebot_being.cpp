@@ -37,11 +37,10 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
 {
    try
    {
+      GetNodeAttribute(t_node, "InfectionPercentage", InfectionPercentage);
       GetNodeAttribute(t_node, "InfectionStart", InfectionStart);
       GetNodeAttribute(t_node, "InfectionTerminal", InfectionTerminal);
       GetNodeAttribute(t_node, "InfectionDistance", InfectionDistance);
-      GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
-      GetNodeAttribute(t_node, "CuringTime", CuringTime);
    }
    catch (CARGoSException &ex)
    {
@@ -133,9 +132,10 @@ void CEyeBotBeing::Reset()
    m_pcRABAct->SetData(0, STATE_START);
    InfectionTime = 0;
 
-   Real r = m_pcRNG->Uniform(CRange<Real>(-1, 1));
+   Real r = m_pcRNG->Uniform(CRange<Real>(0, 1));
 
-   if (r < 0)
+
+   if (r > m_sApocalypseParams.InfectionPercentage)
    {
       m_HState = STATE_HEALTHY;
    }

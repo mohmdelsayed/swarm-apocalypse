@@ -73,9 +73,6 @@ public:
 
    struct SApocalypseParams
    {
-      Real InfectionStart;
-      Real InfectionTerminal;
-      Real InfectionDistance;
       Real CuringDistance;
       Real CuringTime;
 
