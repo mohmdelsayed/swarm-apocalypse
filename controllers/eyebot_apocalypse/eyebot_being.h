@@ -43,10 +43,10 @@ using namespace argos;
 /*
  * A controller is simply an implementation of the CCI_Controller class.
  */
-class CEyeBotBeing : public CCI_Controller {
+class CEyeBotBeing : public CCI_Controller
+{
 
 public:
-
    /*
     * The following variables are used as parameters for
     * flocking interaction. You can set their value
@@ -55,7 +55,8 @@ public:
     * <controllers><eyebot_flocking_controller><parameters><flocking>
     * section.
     */
-   struct SFlockingInteractionParams {
+   struct SFlockingInteractionParams
+   {
       /* Target robot-robot distance in cm */
       Real TargetDistance;
       /* Gain of the Lennard-Jones potential */
@@ -65,12 +66,24 @@ public:
       /* Max length for the resulting interaction force vector */
       Real MaxInteraction;
 
-      void Init(TConfigurationNode& t_node);
+      void Init(TConfigurationNode &t_node);
       Real GeneralizedLennardJones(Real f_distance);
    };
 
-public:
+   struct SApocalypseParams
+   {
+      Real InfectionStart;
+      Real InfectionTerminal;
+      Real InfectionDistance;
+      Real CuringDistance;
+      Real CuringTime;
 
+      void Init(TConfigurationNode &t_node);
+   };
+
+
+
+public:
    /* Class constructor. */
    CEyeBotBeing();
 
@@ -82,7 +95,7 @@ public:
     * The 't_node' variable points to the <parameters> section in the XML file
     * in the <controllers><eyebot_flocking_controller> section.
     */
-   virtual void Init(TConfigurationNode& t_node);
+   virtual void Init(TConfigurationNode &t_node);
 
    /*
     * This function is called once every time step.
@@ -106,7 +119,6 @@ public:
    virtual void Destroy() {}
 
 private:
-
    /*
     * Takes off the robot.
     */
@@ -130,54 +142,56 @@ private:
    CVector2 FlockingVector();
 
    void HealthyBehavior();
-   
+
    void InfectedBehavior();
 
    bool SearchForInfected();
 
    bool SearchForMedicSignal();
-   
-   void PublishHealthState(int);
+
    void Die();
+   
    void MainBehavior();
 
 private:
-
    /* Current robot state */
-   enum EState {
+   enum EState
+   {
       STATE_START = 1,
       STATE_TAKE_OFF,
       STATE_FLOCK
    };
 
    /* Current robot health state */
-   enum HState {
+   enum HState
+   {
       STATE_HEALTHY = 1,
       STATE_INFECTED,
       STATE_DEAD
    };
 
    /* Current robot infected state */
-   enum IState {
+   enum IState
+   {
       STATE_CURED = 1,
       STATE_CURING
    };
 
 private:
-
    /* Pointer to the quadrotor position actuator */
-   CCI_QuadRotorPositionActuator* m_pcPosAct;
+   CCI_QuadRotorPositionActuator *m_pcPosAct;
    /* Pointer to the range-and-bearing actuator */
-   CCI_RangeAndBearingActuator* m_pcRABAct;
+   CCI_RangeAndBearingActuator *m_pcRABAct;
    /* Pointer to the range-and-bearing sensor */
-   CCI_RangeAndBearingSensor* m_pcRABSens;
+   CCI_RangeAndBearingSensor *m_pcRABSens;
    /* Pointer to the eye-bot light sensor */
-   CCI_EyeBotLightSensor* m_pcLightSens;
+   CCI_EyeBotLightSensor *m_pcLightSens;
    /* Pointer to the positioning sensor */
-   CCI_PositioningSensor* m_pcPosSens;
-
+   CCI_PositioningSensor *m_pcPosSens;
    /* The flocking interaction parameters. */
    SFlockingInteractionParams m_sFlockingParams;
+   /* The Apocalypse parameters. */
+   SApocalypseParams m_sApocalypseParams;
 
    /* Current robot state */
    EState m_eState;
@@ -185,20 +199,16 @@ private:
    HState m_HState;
    /* Infection Time */
    Real InfectionTime = -1;
-
    /* Start Time */
-   Real InfectionStart = 10;
+   //Real InfectionStart = 10;
    /* Terminal Time */
-   Real InfectionTerminal = 100;
+   //Real InfectionTerminal = 100;
    /* Infection Distance */
-   Real InfectionDistance = 100;
-
+   //Real InfectionDistance = 100;
    /* The random number generator */
-   CRandom::CRNG* m_pcRNG;
+   CRandom::CRNG *m_pcRNG;
    /* Used as a range for uniform number generation */
-   CRange <Real> ProbRange;
-
-
+   CRange<Real> ProbRange;
    /* Current target position */
    CVector3 m_cTargetPos;
 };

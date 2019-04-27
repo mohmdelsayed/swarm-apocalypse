@@ -29,6 +29,26 @@ void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode &t_node)
    }
 }
 
+
+/****************************************/
+/****************************************/
+
+void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
+{
+   try
+   {
+      GetNodeAttribute(t_node, "InfectionStart", InfectionStart);
+      GetNodeAttribute(t_node, "InfectionTerminal", InfectionTerminal);
+      GetNodeAttribute(t_node, "InfectionDistance", InfectionDistance);
+      GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
+      GetNodeAttribute(t_node, "CuringTime", CuringTime);
+   }
+   catch (CARGoSException &ex)
+   {
+      THROW_ARGOSEXCEPTION_NESTED("Error initializing controller Apocalypse parameters.", ex);
+   }
+}
+
 /****************************************/
 /****************************************/
 
@@ -90,6 +110,9 @@ void CEyeBotBeing::Init(TConfigurationNode &t_node)
    {
       /* Flocking-related */
       m_sFlockingParams.Init(GetNode(t_node, "flocking"));
+      /* apocalypse-related */
+      m_sApocalypseParams.Init(GetNode(t_node, "apocalypse"));
+
    }
    catch (CARGoSException &ex)
    {
@@ -120,7 +143,6 @@ void CEyeBotBeing::Reset()
    {
       m_HState = STATE_INFECTED;
    }
-   
 }
 
 /****************************************/
@@ -128,6 +150,30 @@ void CEyeBotBeing::Reset()
 
 void CEyeBotBeing::ControlStep()
 {
+
+   /* Important Note */
+   
+   /*
+      channel 0 is for taking off:
+      m_pcRABAct->SetData(0, STATE_START);
+      m_pcRABAct->SetData(0, STATE_TAKE_OFF);
+      m_pcRABAct->SetData(0, STATE_FLOCK);
+      
+      channel 1 is for health indication:
+      m_pcRABAct->SetData(1, STATE_HEALTHY);
+      m_pcRABAct->SetData(1, STATE_INFECTED);
+      m_pcRABAct->SetData(1, STATE_DEAD);
+
+      channel 2 is for medic availability:
+      m_pcRABAct->SetData(2, STATE_FREE);
+      m_pcRABAct->SetData(2, STATE_BUSY);
+
+      channel 3 is for curing signals:
+      m_pcRABAct->SetData(3, STATE_CURING);
+      m_pcRABAct->SetData(3, STATE_CURED);
+
+   */
+
    switch (m_eState)
    {
    case STATE_START:
@@ -143,6 +189,9 @@ void CEyeBotBeing::ControlStep()
       LOGERR << "[BUG] Unknown robot state: " << m_eState << std::endl;
    }
 }
+
+/****************************************/
+/****************************************/
 
 void CEyeBotBeing::MainBehavior()
 {
@@ -293,7 +342,7 @@ void CEyeBotBeing::InfectedBehavior()
       // HealthyBehavior();        ====================== >> Kills the simulation1
    }
 
-   if (InfectionTime < InfectionStart)
+   if (InfectionTime < m_sApocalypseParams.InfectionStart)
    {
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_HState = STATE_INFECTED;
@@ -301,7 +350,7 @@ void CEyeBotBeing::InfectedBehavior()
       Flock();
    }
 
-   if (InfectionTime > InfectionStart && InfectionTime < InfectionTerminal)
+   if (InfectionTime > m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal)
    {
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
@@ -309,7 +358,7 @@ void CEyeBotBeing::InfectedBehavior()
       Flock();
    }
 
-   if (InfectionTime > InfectionTerminal)
+   if (InfectionTime > m_sApocalypseParams.InfectionTerminal)
    {
       LOGERR << "I am Dead!" << std::endl;
       m_HState = STATE_DEAD;
@@ -338,7 +387,7 @@ bool CEyeBotBeing::SearchForMedicSignal()
          //LOGERR << "Data is " << tMsgs[i].Range << std::endl;
 
          //LOGERR << tMsgs[i].Data[3] << std::endl;
-         if (tMsgs[i].Data[4] == STATE_CURED)
+         if (tMsgs[i].Data[3] == STATE_CURED)
          {
             return true;
          }
@@ -391,7 +440,7 @@ bool CEyeBotBeing::SearchForInfected()
 
          if (tMsgs[i].Data[1] == STATE_INFECTED)
          {
-            if (tMsgs[i].Range < InfectionDistance)
+            if (tMsgs[i].Range < m_sApocalypseParams.InfectionDistance)
             {
                return true;
             }
@@ -401,10 +450,8 @@ bool CEyeBotBeing::SearchForInfected()
    return false;
 }
 
-void CEyeBotBeing::PublishHealthState(int myHealth)
-{
-   // TODO
-}
+/****************************************/
+/****************************************/
 
 void CEyeBotBeing::Die()
 {
