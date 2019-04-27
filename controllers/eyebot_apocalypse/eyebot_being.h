@@ -128,7 +128,7 @@ private:
    /*
     * Lets the robot perform flocking.
     */
-   void Flock();
+   void Flock(CVector2);
 
    /*
     * Calculates the vector to the closest light.
@@ -140,7 +140,9 @@ private:
     * Calculates the flocking interaction vector.
     * Used by Flock().
     */
-   CVector2 FlockingVector();
+   CVector2 HealthyFlockingVector();
+   CVector2 InfectedFlockingVector();
+   CVector2 MedicFlockingVector();
 
    void HealthyBehavior();
 
@@ -161,6 +163,12 @@ private:
       STATE_START = 1,
       STATE_TAKE_OFF,
       STATE_FLOCK
+   };
+
+   enum MState
+   {
+      STATE_FREE = 1,
+      STATE_BUSY
    };
 
    /* Current robot health state */

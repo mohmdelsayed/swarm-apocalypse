@@ -224,14 +224,14 @@ void CEyeBotBeing::TakeOff()
    if (Distance(m_cTargetPos, m_pcPosSens->GetReading().Position) < POSITIONING_TOLERANCE)
    {
       /* State transition */
-      Flock();
+      Flock(HealthyFlockingVector());
    }
 }
 
 /****************************************/
 /****************************************/
 
-void CEyeBotBeing::Flock()
+void CEyeBotBeing::Flock(CVector2 FlockingVector)
 {
    if (m_eState != STATE_FLOCK)
    {
@@ -240,7 +240,7 @@ void CEyeBotBeing::Flock()
       /* Tell robots around that this robot is ready to flock */
       m_pcRABAct->SetData(0, STATE_FLOCK);
    }
-   CVector2 cDirection = VectorToLight() + FlockingVector();
+   CVector2 cDirection = VectorToLight() + FlockingVector;
    m_pcPosAct->SetRelativePosition(
        CVector3(cDirection.GetX(),
                 cDirection.GetY(),
@@ -272,7 +272,7 @@ CVector2 CEyeBotBeing::VectorToLight()
 /****************************************/
 /****************************************/
 
-CVector2 CEyeBotBeing::FlockingVector()
+CVector2 CEyeBotBeing::InfectedFlockingVector()
 {
    /* Get RAB messages from nearby eye-bots */
    const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
@@ -290,7 +290,7 @@ CVector2 CEyeBotBeing::FlockingVector()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[0] == STATE_FLOCK)
+         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[1] == STATE_INFECTED)
          {
             /*
              * Take the message sender range and horizontal bearing
@@ -331,6 +331,123 @@ CVector2 CEyeBotBeing::FlockingVector()
 /****************************************/
 /****************************************/
 
+
+CVector2 CEyeBotBeing::HealthyFlockingVector()
+{
+   /* Get RAB messages from nearby eye-bots */
+   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
+   /* Go through them to calculate the flocking interaction vector */
+   if (!tMsgs.empty())
+   {
+      /* This will contain the final interaction vector */
+      CVector2 cAccum;
+      /* Used to calculate the vector length of each neighbor's contribution */
+      Real fLJ;
+      /* A counter for the neighbors in state flock */
+      UInt32 unPeers = 0;
+      for (size_t i = 0; i < tMsgs.size(); ++i)
+      {
+         /*
+          * We consider only the neighbors in state flock
+          */
+         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[1] == STATE_HEALTHY)
+         {
+            /*
+             * Take the message sender range and horizontal bearing
+             * With the range, calculate the Lennard-Jones interaction force
+             * Form a 2D vector with the interaction force and the bearing
+             * Sum such vector to the accumulator
+             */
+            /* Calculate LJ */
+            fLJ = m_sFlockingParams.GeneralizedLennardJones(tMsgs[i].Range);
+            /* Sum to accumulator */
+            cAccum += CVector2(fLJ,
+                               tMsgs[i].HorizontalBearing);
+            /* Count one more flocking neighbor */
+            ++unPeers;
+         }
+      }
+      if (unPeers > 0)
+      {
+         /* Divide the accumulator by the number of flocking neighbors */
+         cAccum /= unPeers;
+         /* Limit the interaction force */
+         if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
+         {
+            cAccum.Normalize();
+            cAccum *= m_sFlockingParams.MaxInteraction;
+         }
+      }
+      /* All done */
+      return cAccum;
+   }
+   else
+   {
+      /* No messages received, no interaction */
+      return CVector2();
+   }
+}
+/***************************/
+/**************************/
+
+CVector2 CEyeBotBeing::MedicFlockingVector()
+{
+   /* Get RAB messages from nearby eye-bots */
+   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
+   /* Go through them to calculate the flocking interaction vector */
+   if (!tMsgs.empty())
+   {
+      /* This will contain the final interaction vector */
+      CVector2 cAccum;
+      /* Used to calculate the vector length of each neighbor's contribution */
+      Real fLJ;
+      /* A counter for the neighbors in state flock */
+      UInt32 unPeers = 0;
+      for (size_t i = 0; i < tMsgs.size(); ++i)
+      {
+         /*
+          * We consider only the neighbors in state flock
+          */
+         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[2] == STATE_FREE)
+         {
+            /*
+             * Take the message sender range and horizontal bearing
+             * With the range, calculate the Lennard-Jones interaction force
+             * Form a 2D vector with the interaction force and the bearing
+             * Sum such vector to the accumulator
+             */
+            /* Calculate LJ */
+            fLJ = m_sFlockingParams.GeneralizedLennardJones(tMsgs[i].Range);
+            /* Sum to accumulator */
+            cAccum += CVector2(fLJ,
+                               tMsgs[i].HorizontalBearing);
+            /* Count one more flocking neighbor */
+            ++unPeers;
+         }
+      }
+      if (unPeers > 0)
+      {
+         /* Divide the accumulator by the number of flocking neighbors */
+         cAccum /= unPeers;
+         /* Limit the interaction force */
+         if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
+         {
+            cAccum.Normalize();
+            cAccum *= m_sFlockingParams.MaxInteraction;
+         }
+      }
+      /* All done */
+      return cAccum;
+   }
+   else
+   {
+      /* No messages received, no interaction */
+      return CVector2();
+   }
+}
+/***************************/
+/**************************/
+
 void CEyeBotBeing::InfectedBehavior()
 {
    //LOG << SearchForMedicSignal() << std::endl;
@@ -347,7 +464,7 @@ void CEyeBotBeing::InfectedBehavior()
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
-      Flock();
+      Flock(HealthyFlockingVector());
    }
 
    if (InfectionTime > m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal)
@@ -355,7 +472,7 @@ void CEyeBotBeing::InfectedBehavior()
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
-      Flock();
+      Flock(MedicFlockingVector() - HealthyFlockingVector());
    }
 
    if (InfectionTime > m_sApocalypseParams.InfectionTerminal)
@@ -415,7 +532,7 @@ void CEyeBotBeing::HealthyBehavior()
    }
    else
    {
-      Flock();
+      Flock(HealthyFlockingVector());
    }
 }
 

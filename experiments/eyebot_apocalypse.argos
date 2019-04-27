@@ -27,10 +27,12 @@
       </sensors>
       <params>
         <flocking target_distance="100"
-                  gain="25"
+                  gain="2"
                   exponent="1.5"
                   max_interaction="0.2" />
-        <apocalypse CuringDistance="100" 
+        <apocalypse alpha="0.5"
+                  beta = "0.5" 
+                  CuringDistance="100" 
                   CuringTime="100"   />
 
       </params>

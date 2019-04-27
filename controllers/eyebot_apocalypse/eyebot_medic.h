@@ -75,6 +75,8 @@ public:
    {
       Real CuringDistance;
       Real CuringTime;
+      Real alpha;
+      Real beta;
 
       void Init(TConfigurationNode &t_node);
    };
@@ -145,10 +147,10 @@ private:
     * Calculates the flocking interaction vector.
     * Used by Flock().
     */
-   CVector2 FlockingVector();
+   CVector2 HealthyFlockingVector();
+   CVector2 InfectedFlockingVector();
 
    bool SearchForInfected();
-   void GoToInfected();
 
 private:
    /* Current robot state */

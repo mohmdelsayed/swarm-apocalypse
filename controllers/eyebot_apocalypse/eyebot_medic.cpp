@@ -38,6 +38,8 @@ void CEyeBotMedic::SApocalypseParams::Init(TConfigurationNode &t_node)
    {
       GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
+      GetNodeAttribute(t_node, "alpha", alpha);
+      GetNodeAttribute(t_node, "beta", beta);
    }
    catch (CARGoSException &ex)
    {
@@ -224,7 +226,7 @@ void CEyeBotMedic::Flock()
       /* Tell robots around that this robot is ready to flock */
       m_pcRABAct->SetData(0, STATE_FLOCK);
    }
-   CVector2 cDirection = VectorToLight() + FlockingVector();
+   CVector2 cDirection = VectorToLight() + m_sApocalypseParams.beta*InfectedFlockingVector() - m_sApocalypseParams.alpha*HealthyFlockingVector();
    m_pcPosAct->SetRelativePosition(
        CVector3(cDirection.GetX(),
                 cDirection.GetY(),
@@ -256,7 +258,7 @@ CVector2 CEyeBotMedic::VectorToLight()
 /****************************************/
 /****************************************/
 
-CVector2 CEyeBotMedic::FlockingVector()
+CVector2 CEyeBotMedic::HealthyFlockingVector()
 {
    /* Get RAB messages from nearby eye-bots */
    const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
@@ -274,7 +276,7 @@ CVector2 CEyeBotMedic::FlockingVector()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[0] == STATE_FLOCK)
+         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[1] == STATE_HEALTHY)
          {
             /*
              * Take the message sender range and horizontal bearing
@@ -315,7 +317,8 @@ CVector2 CEyeBotMedic::FlockingVector()
 /****************************************/
 /****************************************/
 
-void CEyeBotMedic::GoToInfected()
+
+CVector2 CEyeBotMedic::InfectedFlockingVector()
 {
    /* Get RAB messages from nearby eye-bots */
    const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
@@ -333,7 +336,7 @@ void CEyeBotMedic::GoToInfected()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[1] == STATE_INFECTED)
+         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[1] == STATE_INFECTED)
          {
             /*
              * Take the message sender range and horizontal bearing
@@ -362,16 +365,18 @@ void CEyeBotMedic::GoToInfected()
          }
       }
       /* All done */
-      CVector2 cDirection = 10 * cAccum;
-      m_pcPosAct->SetRelativePosition(
-          CVector3(cDirection.GetX(),
-                   cDirection.GetY(),
-                   0.0f));
+      return cAccum;
+   }
+   else
+   {
+      /* No messages received, no interaction */
+      return CVector2();
    }
 }
 
 /****************************************/
 /****************************************/
+
 
 void CEyeBotMedic::CuringBehavior()
 {
