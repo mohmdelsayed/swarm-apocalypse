@@ -71,6 +71,7 @@ CEyeBotBeing::CEyeBotBeing() : m_pcPosAct(NULL),
                                m_pcRABAct(NULL),
                                m_pcRABSens(NULL),
                                m_pcRNG(NULL),
+                               m_pcLEDs(NULL),
                                m_pcLightSens(NULL) {}
 
 /****************************************/
@@ -104,6 +105,8 @@ void CEyeBotBeing::Init(TConfigurationNode &t_node)
    m_pcRABSens = GetSensor<CCI_RangeAndBearingSensor>("range_and_bearing");
    m_pcLightSens = GetSensor<CCI_EyeBotLightSensor>("eyebot_light");
    m_pcPosSens = GetSensor<CCI_PositioningSensor>("positioning");
+   m_pcLEDs   = GetActuator<CCI_LEDsActuator>("leds");
+
    m_pcRNG = CRandom::CreateRNG("argos");
 
    /*
@@ -177,7 +180,6 @@ void CEyeBotBeing::ControlStep()
       m_pcRABAct->SetData(3, STATE_CURED);
 
    */
-
    switch (m_eState)
    {
    case STATE_START:
@@ -475,6 +477,7 @@ void CEyeBotBeing::InfectedBehavior()
    {
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
+      m_pcLEDs->SetAllColors(CColor::RED);
       m_pcRABAct->SetData(1, STATE_INFECTED);
       Flock(m_sApocalypseParams.beta_infected*MedicFlockingVector() - m_sApocalypseParams.alpha_infected*HealthyFlockingVector());
    }
@@ -483,6 +486,7 @@ void CEyeBotBeing::InfectedBehavior()
    {
       LOGERR << "I am Dead!" << std::endl;
       m_HState = STATE_DEAD;
+      m_pcLEDs->SetAllColors(CColor::BLUE);
       m_pcRABAct->SetData(1, STATE_DEAD);
       Die();
    }
@@ -525,6 +529,7 @@ void CEyeBotBeing::HealthyBehavior()
 
    LOGERR << "I am Healthy!" << std::endl;
    m_HState = STATE_HEALTHY;
+   m_pcLEDs->SetAllColors(CColor::GREEN);
    m_pcRABAct->SetData(1, STATE_HEALTHY);
 
    if (SearchForInfected())

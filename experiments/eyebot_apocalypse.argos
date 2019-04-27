@@ -19,11 +19,12 @@
         <quadrotor_position implementation="default" />
         <range_and_bearing implementation="default" />
         <leds implementation="default" medium="leds" />
+
       </actuators>
       <sensors>
         <positioning implementation="default" />
         <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
-        <eyebot_light implementation="rot_z_only" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
         <flocking target_distance="100"
@@ -43,11 +44,12 @@
       <actuators>
         <quadrotor_position implementation="default" />
         <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
       </actuators>
       <sensors>
         <positioning implementation="default" />
         <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
-        <eyebot_light implementation="rot_z_only" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
         <apocalypse alpha_healthy = "0.5"
@@ -76,7 +78,7 @@
       <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="30" max_trials="100">
-        <eye-bot id="eb_medic" rab_range="10">
+        <eye-bot id="eb_medic" rab_range="3">
           <controller config="medic" />
         </eye-bot>
       </entity>
@@ -86,7 +88,7 @@
       <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="40" max_trials="100">
-        <eye-bot id="eb_being" rab_range="10">
+        <eye-bot id="eb_being" rab_range="3">
           <controller config="being" />
         </eye-bot>
       </entity>

@@ -29,6 +29,8 @@ argos3/plugins/robots/eye-bot/control_interface/ci_eyebot_light_sensor.h
 -
 argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h
 -
+argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h
+-
 argos3/core/utility/math/vector2.h
 -
 argos3/core/utility/math/rng.h

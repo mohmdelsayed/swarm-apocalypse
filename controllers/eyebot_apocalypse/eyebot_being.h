@@ -30,6 +30,9 @@
 #include <argos3/plugins/robots/eye-bot/control_interface/ci_eyebot_light_sensor.h>
 /* Definition of the positioning sensor */
 #include <argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h>
+
+#include <argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h>
+
 /* Vector2 definitions */
 #include <argos3/core/utility/math/vector2.h>
 #include <argos3/core/utility/math/rng.h>
@@ -201,6 +204,9 @@ private:
    CCI_EyeBotLightSensor *m_pcLightSens;
    /* Pointer to the positioning sensor */
    CCI_PositioningSensor *m_pcPosSens;
+
+   CCI_LEDsActuator* m_pcLEDs;
+
    /* The flocking interaction parameters. */
    SFlockingInteractionParams m_sFlockingParams;
    /* The Apocalypse parameters. */
