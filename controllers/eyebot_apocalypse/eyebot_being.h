@@ -78,6 +78,10 @@ public:
       Real CuringDistance;
       Real CuringTime;
       Real InfectionPercentage;
+      Real alpha_healthy;
+      Real beta_healthy;
+      Real alpha_infected;
+      Real beta_infected;
 
       void Init(TConfigurationNode &t_node);
    };
@@ -208,12 +212,6 @@ private:
    HState m_HState;
    /* Infection Time */
    Real InfectionTime = -1;
-   /* Start Time */
-   //Real InfectionStart = 10;
-   /* Terminal Time */
-   //Real InfectionTerminal = 100;
-   /* Infection Distance */
-   //Real InfectionDistance = 100;
    /* The random number generator */
    CRandom::CRNG *m_pcRNG;
    /* Used as a range for uniform number generation */

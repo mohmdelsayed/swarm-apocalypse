@@ -41,6 +41,10 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "InfectionStart", InfectionStart);
       GetNodeAttribute(t_node, "InfectionTerminal", InfectionTerminal);
       GetNodeAttribute(t_node, "InfectionDistance", InfectionDistance);
+      GetNodeAttribute(t_node, "alpha_healthy", alpha_healthy);
+      GetNodeAttribute(t_node, "beta_healthy", beta_healthy);
+      GetNodeAttribute(t_node, "alpha_infected", alpha_infected);
+      GetNodeAttribute(t_node, "beta_infected", beta_infected);
    }
    catch (CARGoSException &ex)
    {
@@ -464,7 +468,7 @@ void CEyeBotBeing::InfectedBehavior()
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
-      Flock(HealthyFlockingVector());
+      Flock(m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector());
    }
 
    if (InfectionTime > m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal)
@@ -472,7 +476,7 @@ void CEyeBotBeing::InfectedBehavior()
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
-      Flock(MedicFlockingVector() - HealthyFlockingVector());
+      Flock(m_sApocalypseParams.beta_infected*MedicFlockingVector() - m_sApocalypseParams.alpha_infected*HealthyFlockingVector());
    }
 
    if (InfectionTime > m_sApocalypseParams.InfectionTerminal)
@@ -532,7 +536,7 @@ void CEyeBotBeing::HealthyBehavior()
    }
    else
    {
-      Flock(HealthyFlockingVector());
+      Flock(m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector());
    }
 }
 

@@ -50,7 +50,11 @@
         <eyebot_light implementation="rot_z_only" show_rays="true" />
       </sensors>
       <params>
-        <apocalypse InfectionPercentage="0.5"
+        <apocalypse alpha_healthy = "0.5"
+                  beta_healthy = "0.5"
+                  alpha_infected = "0.5"
+                  beta_infected = "0.5"
+                  InfectionPercentage="0.5"
                   InfectionStart="20"
                   InfectionTerminal="500"
                   InfectionDistance="100" />
