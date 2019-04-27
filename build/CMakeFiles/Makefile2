@@ -423,19 +423,107 @@ clean: controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir/clean
 # Directory level rules for directory loop_functions
 
 # Convenience name for "all" pass in the directory.
-loop_functions/all:
+loop_functions/all: loop_functions/id_loop_functions/all
 
 .PHONY : loop_functions/all
 
 # Convenience name for "clean" pass in the directory.
-loop_functions/clean:
+loop_functions/clean: loop_functions/id_loop_functions/clean
 
 .PHONY : loop_functions/clean
 
 # Convenience name for "preinstall" pass in the directory.
-loop_functions/preinstall:
+loop_functions/preinstall: loop_functions/id_loop_functions/preinstall
 
 .PHONY : loop_functions/preinstall
+
+#=============================================================================
+# Directory level rules for directory loop_functions/id_loop_functions
+
+# Convenience name for "all" pass in the directory.
+loop_functions/id_loop_functions/all: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/all
+
+.PHONY : loop_functions/id_loop_functions/all
+
+# Convenience name for "clean" pass in the directory.
+loop_functions/id_loop_functions/clean: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/clean
+loop_functions/id_loop_functions/clean: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/clean
+
+.PHONY : loop_functions/id_loop_functions/clean
+
+# Convenience name for "preinstall" pass in the directory.
+loop_functions/id_loop_functions/preinstall:
+
+.PHONY : loop_functions/id_loop_functions/preinstall
+
+#=============================================================================
+# Target rules for target loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir
+
+# All Build rule for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/all: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/all
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/depend
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=18,19,20 "Built target id_loop_functions"
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/all
+
+# Include target in all.
+all: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles 0
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule
+
+# Convenience name for target.
+id_loop_functions: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule
+
+.PHONY : id_loop_functions
+
+# clean rule for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/clean:
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/clean
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/clean
+
+# clean rule for target.
+clean: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir
+
+# All Build rule for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/all:
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/depend
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=21 "Built target id_loop_functions_automoc"
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/all
+
+# Build rule for subdir invocation for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles 0
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule
+
+# Convenience name for target.
+id_loop_functions_automoc: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule
+
+.PHONY : id_loop_functions_automoc
+
+# clean rule for target.
+loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/clean:
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/clean
+.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/clean
+
+# clean rule for target.
+clean: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/clean
+
+.PHONY : clean
 
 #=============================================================================
 # Directory level rules for directory embedding

@@ -55,7 +55,7 @@ include controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/progre
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target eyebot_medic"
-	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/ Debug
+	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/ ""
 
 eyebot_medic_automoc: controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc
 eyebot_medic_automoc: controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/build.make

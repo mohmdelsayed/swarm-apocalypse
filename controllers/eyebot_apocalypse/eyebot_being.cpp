@@ -112,7 +112,7 @@ void CEyeBotBeing::Reset()
 
    Real r = m_pcRNG->Uniform(CRange<Real>(-1, 1));
 
-   if (r > 0)
+   if (r < 0)
    {
       m_HState = STATE_HEALTHY;
    }
@@ -120,6 +120,7 @@ void CEyeBotBeing::Reset()
    {
       m_HState = STATE_INFECTED;
    }
+   
 }
 
 /****************************************/
@@ -283,18 +284,19 @@ CVector2 CEyeBotBeing::FlockingVector()
 
 void CEyeBotBeing::InfectedBehavior()
 {
-   LOG << SearchForMedicSignal() << std::endl;
-   if (SearchForMedicSignal())
+   //LOG << SearchForMedicSignal() << std::endl;
+   if (SearchForMedicSignal() == true)
    {
-      LOGERR << "I am cured! Thank you!";
+      LOG << "I am cured! Thank you!" << std::endl;
+      m_HState = STATE_HEALTHY;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
-      HealthyBehavior();
+      // HealthyBehavior();        ====================== >> Kills the simulation1
    }
 
    if (InfectionTime < InfectionStart)
    {
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
-      //m_HState = STATE_HEALTHY;  <=========================== Horrible mistake
+      m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
       Flock();
    }
@@ -336,7 +338,7 @@ bool CEyeBotBeing::SearchForMedicSignal()
          //LOGERR << "Data is " << tMsgs[i].Range << std::endl;
 
          //LOGERR << tMsgs[i].Data[3] << std::endl;
-         if (tMsgs[i].Data[3] == STATE_CURED)
+         if (tMsgs[i].Data[4] == STATE_CURED)
          {
             return true;
          }

@@ -214,6 +214,32 @@ eyebot_being_automoc/fast:
 	$(MAKE) -f controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir/build.make controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir/build
 .PHONY : eyebot_being_automoc/fast
 
+#=============================================================================
+# Target rules for targets named id_loop_functions
+
+# Build rule for target.
+id_loop_functions: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 id_loop_functions
+.PHONY : id_loop_functions
+
+# fast build rule for target.
+id_loop_functions/fast:
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build
+.PHONY : id_loop_functions/fast
+
+#=============================================================================
+# Target rules for targets named id_loop_functions_automoc
+
+# Build rule for target.
+id_loop_functions_automoc: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 id_loop_functions_automoc
+.PHONY : id_loop_functions_automoc
+
+# fast build rule for target.
+id_loop_functions_automoc/fast:
+	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build
+.PHONY : id_loop_functions_automoc/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -230,6 +256,8 @@ help:
 	@echo "... eyebot_being"
 	@echo "... eyebot_medic_automoc"
 	@echo "... eyebot_being_automoc"
+	@echo "... id_loop_functions"
+	@echo "... id_loop_functions_automoc"
 .PHONY : help
 
 

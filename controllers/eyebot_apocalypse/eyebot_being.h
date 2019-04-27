@@ -145,22 +145,22 @@ private:
 
    /* Current robot state */
    enum EState {
-      STATE_START = 0,
+      STATE_START = 1,
       STATE_TAKE_OFF,
       STATE_FLOCK
    };
 
    /* Current robot health state */
    enum HState {
-      STATE_HEALTHY = 0,
+      STATE_HEALTHY = 1,
       STATE_INFECTED,
       STATE_DEAD
    };
 
    /* Current robot infected state */
    enum IState {
-      STATE_CURING = 0,
-      STATE_CURED
+      STATE_CURED = 1,
+      STATE_CURING
    };
 
 private:
@@ -187,11 +187,11 @@ private:
    Real InfectionTime = -1;
 
    /* Start Time */
-   Real InfectionStart = 50;
+   Real InfectionStart = 10;
    /* Terminal Time */
    Real InfectionTerminal = 100;
    /* Infection Distance */
-   Real InfectionDistance = 150;
+   Real InfectionDistance = 100;
 
    /* The random number generator */
    CRandom::CRNG* m_pcRNG;

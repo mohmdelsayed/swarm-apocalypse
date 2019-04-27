@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions/id_loop_functions_automoc.cpp
+
+/home/mohamed/swarm-apocalypse/loop_functions/id_loop_functions/id_qtuser_functions.cpp
+id_qtuser_functions.h
+/home/mohamed/swarm-apocalypse/loop_functions/id_loop_functions/id_qtuser_functions.h
+
+/home/mohamed/swarm-apocalypse/loop_functions/id_loop_functions/id_qtuser_functions.h
+argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_user_functions.h
+-
+argos3/plugins/robots/eye-bot/simulator/eyebot_entity.h
+-
+

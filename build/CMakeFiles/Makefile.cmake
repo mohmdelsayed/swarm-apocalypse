@@ -61,6 +61,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../controllers/eyebot_flocking/CMakeLists.txt"
   "../embedding/CMakeLists.txt"
   "../loop_functions/CMakeLists.txt"
+  "../loop_functions/id_loop_functions/CMakeLists.txt"
   "/usr/share/argos3/cmake/ARGoSCheckQTOpenGL.cmake"
   "/usr/share/argos3/cmake/FindLua52.cmake"
   "/usr/share/cmake-3.5/Modules/AutogenInfo.cmake.in"
@@ -168,6 +169,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "controllers/eyebot_flocking/CMakeFiles/CMakeDirectoryInformation.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/CMakeDirectoryInformation.cmake"
   "loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "loop_functions/id_loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
   "embedding/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -181,4 +183,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_being.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir/DependInfo.cmake"
+  "loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/DependInfo.cmake"
+  "loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/DependInfo.cmake"
   )

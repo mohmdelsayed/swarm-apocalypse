@@ -104,6 +104,10 @@
         <placement idx="0" position="0,0.192728,22.8506,1" look_at="-0.0395853,0.192728,21.8506" lens_focal_length="20" />
       </camera>
     </qt-opengl>
-  </visualization>
 
+    <!-- <qt-opengl>
+      <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
+                      label="id_qtuser_functions" />
+    </qt-opengl> -->
+  </visualization>
 </argos-configuration>

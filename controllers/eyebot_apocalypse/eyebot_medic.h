@@ -145,26 +145,26 @@ private:
 
    /* Current robot state */
    enum EState {
-      STATE_START = 0,
+      STATE_START = 1,
       STATE_TAKE_OFF,
       STATE_FLOCK
    };
    enum MState {
-      STATE_FREE = 0,
+      STATE_FREE = 1,
       STATE_BUSY
    };
 
    /* Current robot health state */
    enum HState {
-      STATE_HEALTHY = 0,
+      STATE_HEALTHY = 1,
       STATE_INFECTED,
       STATE_DEAD
    };
 
    /* Current robot infected state */
    enum IState {
-      STATE_CURING = 0,
-      STATE_CURED
+      STATE_CURED = 1,
+      STATE_CURING
    };
 
 private:
@@ -190,10 +190,10 @@ private:
    /* Current infected state */
    IState m_IState;
    /* Curing Distance */
-   Real CuringDistance = 500;
+   Real CuringDistance = 100;
 
    /* Curing Time */
-   Real CuringTime = 50;
+   Real CuringTime = 100;
 
    /* Curing Time */
    Real TotalCuringTime;

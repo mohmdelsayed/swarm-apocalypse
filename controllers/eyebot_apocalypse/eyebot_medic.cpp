@@ -101,6 +101,7 @@ void CEyeBotMedic::Reset() {
    /* Tell robots around that this robot is starting */
    m_pcRABAct->SetData(0, STATE_START);
    /* Initially the medic is not curing anyone */
+   m_pcRABAct->SetData(2, STATE_FREE);
    m_MState = STATE_FREE;
 }
 
@@ -247,25 +248,26 @@ CVector2 CEyeBotMedic::FlockingVector() {
 
 
 void CEyeBotMedic::CuringBehavior() {
-
+   m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
-   LOGERR << "curing time is " << TotalCuringTime << std::endl;
-   
 
-   while(TotalCuringTime<CuringTime){
-      LOGERR << "You are being cured" << std::endl;
+   if(TotalCuringTime<CuringTime){
+      ///LOG << "You are being cured" << std::endl;
       m_pcRABAct->SetData(3, STATE_CURING);
       TotalCuringTime = TotalCuringTime + 1;
    }
-   m_pcRABAct->SetData(3, STATE_CURED);
-
-   
+   else {
+   LOGERR << "You are cured" << std::endl;
+   m_MState = STATE_FREE;
+   m_pcRABAct->SetData(2, STATE_FREE);
+   m_pcRABAct->SetData(4, STATE_CURED);
+   }
    //m_pcLEDs->SetAllColors(CColor::WHITE);
 
 }
 
 void CEyeBotMedic::AdvertisingBehavior() {
-
+   m_MState = STATE_FREE;
    // Send I am free!
    LOGERR << "I am a Doctor!" << std::endl;
    m_pcRABAct->SetData(2, STATE_FREE);
@@ -295,7 +297,7 @@ bool CEyeBotMedic::SearchForInfected() {
           */         
          if(tMsgs[i].Data[1] == STATE_INFECTED) {         
             if(tMsgs[i].Range < CuringDistance) {
-               return true;;
+               return true;
             }
          }
       }

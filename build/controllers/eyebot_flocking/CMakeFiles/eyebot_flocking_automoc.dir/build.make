@@ -55,7 +55,7 @@ include controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/progr
 
 controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target eyebot_flocking"
-	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/ Debug
+	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/ ""
 
 eyebot_flocking_automoc: controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc
 eyebot_flocking_automoc: controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/build.make
