@@ -240,6 +240,64 @@ CVector2 CEyeBotMedic::FlockingVector() {
       /* No messages received, no interaction */
       return CVector2();
    }
+
+
+}
+
+/****************************************/
+/****************************************/
+
+void CEyeBotMedic::GoToInfected() {
+   /* Get RAB messages from nearby eye-bots */
+   const CCI_RangeAndBearingSensor::TReadings& tMsgs = m_pcRABSens->GetReadings();
+   /* Go through them to calculate the flocking interaction vector */
+   if(! tMsgs.empty()) {
+      /* This will contain the final interaction vector */
+      CVector2 cAccum;
+      /* Used to calculate the vector length of each neighbor's contribution */
+      Real fLJ;
+      /* A counter for the neighbors in state flock */
+      UInt32 unPeers = 0;
+      for(size_t i = 0; i < tMsgs.size(); ++i) {
+         /*
+          * We consider only the neighbors in state flock
+          */
+         if(tMsgs[i].Data[1] == STATE_INFECTED) {
+            /*
+             * Take the message sender range and horizontal bearing
+             * With the range, calculate the Lennard-Jones interaction force
+             * Form a 2D vector with the interaction force and the bearing
+             * Sum such vector to the accumulator
+             */
+            /* Calculate LJ */
+            fLJ = m_sFlockingParams.GeneralizedLennardJones(tMsgs[i].Range);
+            /* Sum to accumulator */
+            cAccum += CVector2(fLJ,
+                               tMsgs[i].HorizontalBearing);
+            /* Count one more flocking neighbor */
+            ++unPeers;
+         }
+      }
+      if(unPeers > 0) {
+         /* Divide the accumulator by the number of flocking neighbors */
+         cAccum /= unPeers;
+         /* Limit the interaction force */
+         if(cAccum.Length() > m_sFlockingParams.MaxInteraction) {
+            cAccum.Normalize();
+            cAccum *= m_sFlockingParams.MaxInteraction;
+         }
+      }
+      /* All done */
+      CVector2 cDirection = cAccum;
+      m_pcPosAct->SetRelativePosition(
+         CVector3(cDirection.GetX(),
+                  cDirection.GetY(),
+                  0.0f));
+
+   }
+
+
+
 }
 
 
@@ -272,11 +330,14 @@ void CEyeBotMedic::AdvertisingBehavior() {
    LOGERR << "I am a Doctor!" << std::endl;
    m_pcRABAct->SetData(2, STATE_FREE);
 
+
    if(SearchForInfected()){
       TotalCuringTime = 0;
       CuringBehavior();
    } else {
-      Flock();
+      //Flock();
+   GoToInfected();
+
    }
 
 

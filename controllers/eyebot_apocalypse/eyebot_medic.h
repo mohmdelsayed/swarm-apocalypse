@@ -141,6 +141,7 @@ private:
    CVector2 FlockingVector();
 
    bool SearchForInfected();
+   void GoToInfected();
 private:
 
    /* Current robot state */

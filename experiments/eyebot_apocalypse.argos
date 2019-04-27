@@ -61,7 +61,7 @@
     <distribute>
       <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="20" max_trials="100">
+      <entity quantity="10" max_trials="100">
         <eye-bot id="eb_medic" rab_range="10">
           <controller config="medic" />
         </eye-bot>
@@ -71,7 +71,7 @@
     <distribute>
       <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="20" max_trials="100">
+      <entity quantity="40" max_trials="100">
         <eye-bot id="eb_being" rab_range="10">
           <controller config="being" />
         </eye-bot>
