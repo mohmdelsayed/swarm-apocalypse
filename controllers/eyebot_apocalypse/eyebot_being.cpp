@@ -61,7 +61,9 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
 Real CEyeBotBeing::SFlockingInteractionParams::GeneralizedLennardJones(Real f_distance)
 {
    Real fNormDistExp = ::pow(TargetDistance / f_distance, Exponent);
-   return -Gain / f_distance * (fNormDistExp * fNormDistExp - fNormDistExp);
+   return -1* (fNormDistExp * fNormDistExp - Gain*fNormDistExp);
+   //    Real fNorm = ::pow((1-exp(-Exponent*(f_distance-TargetDistance))),2);
+   // return  -Gain *fNorm;
 }
 
 /****************************************/
@@ -108,6 +110,9 @@ void CEyeBotBeing::Init(TConfigurationNode &t_node)
    m_pcLEDs   = GetActuator<CCI_LEDsActuator>("leds");
 
    m_pcRNG = CRandom::CreateRNG("argos");
+   //m_pcRNG->SetSeed(1000);
+
+   //LOG<< m_pcRNG->GetSeed()<<std::endl;
 
    /*
     * Parse the config file
@@ -330,7 +335,7 @@ CVector2 CEyeBotBeing::InfectedFlockingVector()
    else
    {
       /* No messages received, no interaction */
-      return CVector2();
+      return CVector2(0,0);
    }
 }
 
@@ -381,8 +386,9 @@ CVector2 CEyeBotBeing::HealthyFlockingVector()
          if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
          {
             cAccum.Normalize();
-            cAccum *= m_sFlockingParams.MaxInteraction;
+            //cAccum *= m_sFlockingParams.MaxInteraction;
          }
+
       }
       /* All done */
       return cAccum;
@@ -461,32 +467,39 @@ void CEyeBotBeing::InfectedBehavior()
    {
       LOG << "I am cured! Thank you!" << std::endl;
       m_HState = STATE_HEALTHY;
-      m_pcRABAct->SetData(1, STATE_HEALTHY);
-      // HealthyBehavior();        ====================== >> Kills the simulation1
+      // m_pcRABAct->SetData(1, STATE_HEALTHY);
+      //HealthyBehavior();        //====================== >> Kills the simulation1
    }
 
-   if (InfectionTime < m_sApocalypseParams.InfectionStart)
+   if (InfectionTime < m_sApocalypseParams.InfectionStart && m_HState == STATE_INFECTED)
    {
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
-      Flock(m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector());
+      // m_pcLEDs->SetAllColors(CColor::WHITE);
+
+      CVector2 normalized_vector = myNormalize((m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector()));
+      Flock(normalized_vector);
    }
 
-   if (InfectionTime > m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal)
+   if (InfectionTime > m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal && m_HState == STATE_INFECTED)
    {
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
-      m_pcLEDs->SetAllColors(CColor::RED);
+      // m_pcLEDs->SetAllColors(CColor::RED);
       m_pcRABAct->SetData(1, STATE_INFECTED);
-      Flock(m_sApocalypseParams.beta_infected*MedicFlockingVector() - m_sApocalypseParams.alpha_infected*HealthyFlockingVector());
+      //LOG << "I " << (m_sApocalypseParams.beta_infected*HealthyFlockingVector() - m_sApocalypseParams.alpha_infected*InfectedFlockingVector()).Normalize()<< std::endl;
+
+   CVector2 normalized_vector = myNormalize((m_sApocalypseParams.beta_infected*MedicFlockingVector() - m_sApocalypseParams.alpha_infected*HealthyFlockingVector()));
+      LOG << normalized_vector << std::endl;
+      Flock(normalized_vector);
    }
 
    if (InfectionTime > m_sApocalypseParams.InfectionTerminal)
    {
       LOGERR << "I am Dead!" << std::endl;
       m_HState = STATE_DEAD;
-      m_pcLEDs->SetAllColors(CColor::BLUE);
+      // m_pcLEDs->SetAllColors(CColor::BLUE);
       m_pcRABAct->SetData(1, STATE_DEAD);
       Die();
    }
@@ -529,7 +542,7 @@ void CEyeBotBeing::HealthyBehavior()
 
    LOGERR << "I am Healthy!" << std::endl;
    m_HState = STATE_HEALTHY;
-   m_pcLEDs->SetAllColors(CColor::GREEN);
+   // m_pcLEDs->SetAllColors(CColor::GREEN);
    m_pcRABAct->SetData(1, STATE_HEALTHY);
 
    if (SearchForInfected())
@@ -541,7 +554,8 @@ void CEyeBotBeing::HealthyBehavior()
    }
    else
    {
-      Flock(m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector());
+      CVector2 normalized_vector = ((m_sApocalypseParams.beta_healthy*HealthyFlockingVector() - m_sApocalypseParams.alpha_healthy*InfectedFlockingVector()));
+      Flock(normalized_vector);
    }
 }
 
@@ -585,6 +599,15 @@ void CEyeBotBeing::Die()
        CVector3(0.0f,
                 0.0f,
                 0.0f));
+}
+
+CVector2 CEyeBotBeing::myNormalize(CVector2 x){
+   if (x.Length() == 0){
+      return CVector2(0,0);
+   }
+   else {
+      return x/x.Length();
+   }
 }
 
 /*

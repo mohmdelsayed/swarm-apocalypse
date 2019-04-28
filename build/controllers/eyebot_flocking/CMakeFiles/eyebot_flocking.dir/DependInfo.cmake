@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/mohamed/swarm-apocalypse/controllers/eyebot_flocking/eyebot_flocking.cpp" "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/eyebot_flocking.cpp.o"
-  "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/eyebot_flocking_automoc.cpp" "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/eyebot_flocking_automoc.cpp.o"
+  "/home/amer/argos3/swarm-apocalypse/controllers/eyebot_flocking/eyebot_flocking.cpp" "/home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/eyebot_flocking.cpp.o"
+  "/home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_flocking/eyebot_flocking_automoc.cpp" "/home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/eyebot_flocking_automoc.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -20,12 +20,13 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "controllers/eyebot_flocking"
   "../controllers/eyebot_flocking"
-  "/home/mohamed/anaconda3/include/qt"
-  "/home/mohamed/anaconda3/include/qt/QtWidgets"
-  "/home/mohamed/anaconda3/include/qt/QtGui"
-  "/home/mohamed/anaconda3/include/qt/QtCore"
-  "/home/mohamed/anaconda3/./mkspecs/linux-g++"
+  "/usr/include/x86_64-linux-gnu/qt5"
+  "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"
+  "/usr/include/x86_64-linux-gnu/qt5/QtGui"
+  "/usr/include/x86_64-linux-gnu/qt5/QtCore"
+  "/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"
   "../"
+  "/usr/local/include"
   "/usr/include/lua5.2"
   "../controllers"
   )

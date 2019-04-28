@@ -162,6 +162,7 @@ private:
    void Die();
    
    void MainBehavior();
+   CVector2 myNormalize(CVector2);
 
 private:
    /* Current robot state */

@@ -6,7 +6,11 @@
   <!-- ************************* -->
   <framework>
     <system threads="0" />
-    <experiment length="0" ticks_per_second="10" random_seed="12345" />
+    <experiment length="0" ticks_per_second="10" random_seed="54321" /> <!-- FIXED -->
+
+    <profiling file="simulation_results.txt"
+             format="table"
+             truncate_file="true" />
   </framework>
   
   <!-- *************** -->
@@ -14,7 +18,7 @@
   <!-- *************** -->
   <controllers>
     <!-- Eye-bot controller -->
-    <eyebot_medic_controller id="medic" library="build/controllers/eyebot_apocalypse/libeyebot_medic.so">
+    <!-- <eyebot_medic_controller id="medic" library="build/controllers/eyebot_apocalypse/libeyebot_medic.so">
       <actuators>
         <quadrotor_position implementation="default" />
         <range_and_bearing implementation="default" />
@@ -28,16 +32,20 @@
       </sensors>
       <params>
         <flocking target_distance="100"
-                  gain="2"
+                  gain="25"
                   exponent="1.5"
-                  max_interaction="0.2" />
-        <apocalypse alpha="0.5"
-                  beta = "0.5" 
-                  CuringDistance="100" 
-                  CuringTime="100"   />
+                  max_interaction="0.2" /> 
+        <apocalypse alpha_healthy = "0"
+                  beta_healthy = "1"
+                  alpha_infected = "0"
+                  beta_infected = "0"
+                  InfectionPercentage="0.0"
+                  InfectionStart="5"
+                  InfectionTerminal="50"
+                  InfectionDistance="100" />
 
       </params>
-    </eyebot_medic_controller>
+    </eyebot_medic_controller> -->
 
 
     <eyebot_being_controller id="being" library="build/controllers/eyebot_apocalypse/libeyebot_being.so">
@@ -46,24 +54,27 @@
         <range_and_bearing implementation="default" />
         <leds implementation="default" medium="leds" />
       </actuators>
-      <sensors>
+      <sensors> 
         <positioning implementation="default" />
         <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
         <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
-        <apocalypse alpha_healthy = "0.5"
-                  beta_healthy = "0.5"
-                  alpha_infected = "0.5"
-                  beta_infected = "0.5"
-                  InfectionPercentage="0.5"
-                  InfectionStart="20"
-                  InfectionTerminal="500"
+        <apocalypse alpha_healthy = "0"
+                  beta_healthy = "1.0"
+                  alpha_infected = "0"
+                  beta_infected = "0"
+                  InfectionPercentage="0"
+                  InfectionStart="0"
+                  InfectionTerminal="50000000000"
                   InfectionDistance="100" />
-        <flocking target_distance="100"
-                  gain="25"
-                  exponent="1.5"
-                  max_interaction="0.2" />
+        <flocking target_distance="200"
+                  gain="1.4"
+                  exponent="1"
+                  max_interaction="0" /> <!-- CM how is important the team work ? -->
+                  <!-- target_distance : σ  is the distance at which the intermolecular potential between the two robot .-->
+                  <!-- gain : ϵ  is measure of how strongly the two particles attract each other.-->
+                  <!-- max_interaction : ϵ  is measure of how strongly the two particles attract each other.-->
 
       </params>
     </eyebot_being_controller>
@@ -74,21 +85,21 @@
   <!-- *********************** -->
   <arena size="30, 30, 5" center="0, 0, 1.5" positional_grid_size="30,30,5">
     <light id="l" position="10,10,3" orientation="0,0,0" color="white" intensity="20" medium="light" />
-    <distribute>
+    <!-- <distribute>
       <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="30" max_trials="100">
-        <eye-bot id="eb_medic" rab_range="3">
+        <eye-bot id="eb_medic" rab_range="10">
           <controller config="medic" />
         </eye-bot>
       </entity>
-    </distribute>
+    </distribute> -->
 
     <distribute>
-      <position method="uniform" min="-13,-13,0" max="-5,-5,0" />
+      <position method="uniform" min="-13,-13,0" max="-3,-3,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="40" max_trials="100">
-        <eye-bot id="eb_being" rab_range="3">
+      <entity quantity="50" max_trials="1000">
+        <eye-bot id="eb_being" rab_range="2.5">
           <controller config="being" />
         </eye-bot>
       </entity>

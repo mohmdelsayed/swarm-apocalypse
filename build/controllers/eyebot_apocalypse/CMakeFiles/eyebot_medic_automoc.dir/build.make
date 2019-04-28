@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mohamed/swarm-apocalypse
+CMAKE_SOURCE_DIR = /home/amer/argos3/swarm-apocalypse
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mohamed/swarm-apocalypse/build
+CMAKE_BINARY_DIR = /home/amer/argos3/swarm-apocalypse/build
 
 # Utility rule file for eyebot_medic_automoc.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/mohamed/swarm-apocalypse/build
 include controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/progress.make
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target eyebot_medic"
-	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/ ""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/amer/argos3/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target eyebot_medic"
+	cd /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse && /usr/bin/cmake -E cmake_autogen /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/ Release
 
 eyebot_medic_automoc: controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc
 eyebot_medic_automoc: controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/build.make
@@ -68,10 +68,10 @@ controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/build: eyebot_
 .PHONY : controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/build
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/clean:
-	cd /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse && $(CMAKE_COMMAND) -P CMakeFiles/eyebot_medic_automoc.dir/cmake_clean.cmake
+	cd /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse && $(CMAKE_COMMAND) -P CMakeFiles/eyebot_medic_automoc.dir/cmake_clean.cmake
 .PHONY : controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/clean
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/depend:
-	cd /home/mohamed/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mohamed/swarm-apocalypse /home/mohamed/swarm-apocalypse/controllers/eyebot_apocalypse /home/mohamed/swarm-apocalypse/build /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse /home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/amer/argos3/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/amer/argos3/swarm-apocalypse /home/amer/argos3/swarm-apocalypse/controllers/eyebot_apocalypse /home/amer/argos3/swarm-apocalypse/build /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/depend
 
