@@ -231,6 +231,7 @@ private:
    {
       STATE_HEALTHY = 1,
       STATE_INFECTED,
+      STATE_BEING_CURED,
       STATE_DEAD
    };
 

@@ -554,6 +554,7 @@ void CEyeBotBeing::InfectedBehavior()
    {
       m_HState = STATE_DEAD;
       Die();
+      m_pcRABAct->SetData(1, STATE_DEAD);
    }
 }
 

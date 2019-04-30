@@ -5,9 +5,9 @@
   <!-- * General configuration * -->
   <!-- ************************* -->
   <framework>
-    <system threads="0" />
+    <system threads="4" />
     <!-- fixed seed for reproducable simulations -->
-    <experiment length="0" ticks_per_second="10" random_seed="1236545" />
+    <experiment length="0" ticks_per_second="10" random_seed="79864546" />
     <profiling file="simulation_results.txt"
              format="table"
              truncate_file="true" />
@@ -30,17 +30,17 @@
         <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
-        <apocalypse alpha_healthy = "1"
-                  beta_healthy = "-1"
-                  gamma1_healthy = "-1"
-                  gamma2_healthy = "-1"
-                  alpha_infected = "-1"
-                  beta_infected = "1"
-                  gamma1_infected = "1"
-                  gamma2_infected = "-1"
+        <apocalypse alpha_healthy = "0.1"
+                  beta_healthy = "-0.01"
+                  gamma1_healthy = "-0.1"
+                  gamma2_healthy = "-0.1"
+                  alpha_infected = "-0.1"
+                  beta_infected = ".1"
+                  gamma1_infected = "-0.1"
+                  gamma2_infected = "-0.1"
                   InfectionPercentage="1"
                   InfectionStart="0"
-                  InfectionTerminal="200"
+                  InfectionTerminal="50000"
                   InfectionDistance="200"
                   CuringDistance = "400"
                   CuringTime = "50" />
@@ -67,10 +67,10 @@
         <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
-        <apocalypse alpha_medic = "-1"
-                  beta_medic = "1"
-                  gamma1_medic = "-1"
-                  gamma2_medic = "-1"
+        <apocalypse alpha_medic = "-0.1"
+                  beta_medic = "0.1"
+                  gamma1_medic = "-0.1"
+                  gamma2_medic = "-0.1"
                   CuringDistance = "400"
                   CuringTime = "50" />
 
@@ -92,8 +92,8 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="15" max_trials="1000">
-        <eye-bot id="eb_being" rab_range="15">
+      <entity quantity="3" max_trials="1000">
+        <eye-bot id="eb_being" rab_range="10">
           <controller config="being" />
         </eye-bot>
       </entity>
@@ -103,7 +103,7 @@
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="1" max_trials="1000">
-        <eye-bot id="eb_medic" rab_range="15">
+        <eye-bot id="eb_medic" rab_range="10">
           <controller config="medic" />
         </eye-bot>
       </entity>

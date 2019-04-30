@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC   -shared  -o libeyebot_medic.so CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o CMakeFiles/eyebot_medic.dir/eyebot_medic_automoc.cpp.o  -L/usr/lib/argos3 -largos3core_simulator -largos3plugin_simulator_eyebot -largos3plugin_simulator_genericrobot -Wl,-rpath,/usr/lib/argos3 
