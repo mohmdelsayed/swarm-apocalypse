@@ -270,6 +270,9 @@ private:
    CRange<Real> ProbRange;
    /* Current target position */
    CVector3 m_cTargetPos;
+   Real CurrentCuringTime;
+   bool MedicSignal = false;
+   bool CuringSignal = false;
 };
 
 #endif

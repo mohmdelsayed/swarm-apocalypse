@@ -7,7 +7,7 @@
   <framework>
     <system threads="0" />
     <!-- fixed seed for reproducable simulations -->
-    <experiment length="0" ticks_per_second="10" random_seed="12345" />
+    <experiment length="0" ticks_per_second="10" random_seed="1236545" />
     <profiling file="simulation_results.txt"
              format="table"
              truncate_file="true" />
@@ -17,7 +17,7 @@
   <!-- * Controllers * -->
   <!-- *************** -->
   <controllers>
-    <!-- Eye-Medic controller -->
+    <!-- Eye-Being controller -->
     <eyebot_being_controller id="being" library="build/controllers/eyebot_apocalypse/libeyebot_being.so">
       <actuators>
         <quadrotor_position implementation="default" />
@@ -30,30 +30,30 @@
         <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
-        <apocalypse alpha_healthy = "0.1"
-                  beta_healthy = "-0.1"
-                  gamma1_healthy = "-0.1"
-                  gamma2_healthy = "-0.1"
-                  alpha_infected = "-0.1"
-                  beta_infected = "0.1"
+        <apocalypse alpha_healthy = "1"
+                  beta_healthy = "-1"
+                  gamma1_healthy = "-1"
+                  gamma2_healthy = "-1"
+                  alpha_infected = "-1"
+                  beta_infected = "1"
                   gamma1_infected = "1"
-                  gamma2_infected = "-0.1"
+                  gamma2_infected = "-1"
                   InfectionPercentage="1"
                   InfectionStart="0"
-                  InfectionTerminal="20000"
+                  InfectionTerminal="200"
                   InfectionDistance="200"
                   CuringDistance = "400"
                   CuringTime = "50" />
 
         <flocking target_distance="250"
-                  gain="0.55"
+                  gain="0.9"
                   exponent="2"
-                  max_interaction="0.02" />
+                  max_interaction="0" />
       </params>
     </eyebot_being_controller>
 
 
-    <!-- Eye-Being controller -->
+    <!-- Eye-Medic controller -->
     <eyebot_medic_controller id="medic" library="build/controllers/eyebot_apocalypse/libeyebot_medic.so">
       <actuators>
         <quadrotor_position implementation="default" />
@@ -67,17 +67,17 @@
         <eyebot_light implementation="rot_z_only" show_rays="false" />
       </sensors>
       <params>
-        <apocalypse alpha_medic = "-0.1"
-                  beta_medic = "0.1"
-                  gamma1_medic = "1"
-                  gamma2_medic = "-0.1"
+        <apocalypse alpha_medic = "-1"
+                  beta_medic = "1"
+                  gamma1_medic = "-1"
+                  gamma2_medic = "-1"
                   CuringDistance = "400"
                   CuringTime = "50" />
 
         <flocking target_distance="250"
-                  gain="0.55"
+                  gain="0.9"
                   exponent="2"
-                  max_interaction="0.02" /> 
+                  max_interaction="0" /> 
 
       </params>
     </eyebot_medic_controller>
@@ -92,8 +92,8 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="1" max_trials="1000">
-        <eye-bot id="eb_being" rab_range="10">
+      <entity quantity="15" max_trials="1000">
+        <eye-bot id="eb_being" rab_range="15">
           <controller config="being" />
         </eye-bot>
       </entity>
@@ -103,7 +103,7 @@
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="1" max_trials="1000">
-        <eye-bot id="eb_medic" rab_range="10">
+        <eye-bot id="eb_medic" rab_range="15">
           <controller config="medic" />
         </eye-bot>
       </entity>

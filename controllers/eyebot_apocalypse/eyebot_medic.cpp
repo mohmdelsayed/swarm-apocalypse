@@ -141,7 +141,8 @@ void CEyeBotMedic::Reset()
 void CEyeBotMedic::ControlStep()
 {
    /* Important Note */
-   
+   // m_pcLEDs->SetAllColors(CColor::BLUE);
+
    /*
       channel 0 is for taking off:
       m_pcRABAct->SetData(0, STATE_START);
@@ -182,6 +183,7 @@ void CEyeBotMedic::ControlStep()
 /****************************************/
 void CEyeBotMedic::MainBehavior()
 {
+   //StopToCure = false;
    if (m_MState == STATE_BUSY)
    {
       CuringBehavior();
@@ -476,22 +478,24 @@ CVector2 CEyeBotMedic::MedicBusyFlockingVector()
 
 void CEyeBotMedic::CuringBehavior()
 {
+   LOGERR << "I am a busy Doctor!" << std::endl;
+
    m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
 
-   if (TotalCuringTime < m_sApocalypseParams.CuringTime /*&& StopToCure*/)
+   if (TotalCuringTime != m_sApocalypseParams.CuringTime)
    {
       m_pcRABAct->SetData(3, STATE_CURING);
+      LOGERR << "You are being cured" << std::endl;
       TotalCuringTime = TotalCuringTime + 1;
-      LOG << "I am curing!" << std::endl;
    }
    else
    {
       LOG << "You are cured" << std::endl;
       m_MState = STATE_FREE;
-      m_pcRABAct->SetData(2, STATE_FREE);
       m_pcRABAct->SetData(4, STATE_CURED);
-      //StopToCure = false;
+      m_pcRABAct->SetData(2, STATE_FREE);
+      StopToCure = true;
    }
 }
 
@@ -501,25 +505,13 @@ void CEyeBotMedic::CuringBehavior()
 void CEyeBotMedic::AdvertisingBehavior()
 {
    m_MState = STATE_FREE;
-   LOGERR << "I am a Doctor!" << std::endl;
+   LOGERR << "I am a free Doctor!" << std::endl;
    m_pcRABAct->SetData(2, STATE_FREE);
 
-   if (SearchForInfected())
+   if (SearchForInfected() && !StopToCure)
    {
-      TotalCuringTime = 0;
-      CuringBehavior();
-      //StopToCure = true;
-   }
-/*
-   if (StopToCure)
-   {  
-      TotalCuringTime = 0;
-      CuringBehavior();
-   }
-*/
-   
-   else
-   {
+      m_MState = STATE_BUSY;
+   } else {
       CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + m_sApocalypseParams.beta_medic*InfectedFlockingVector() + m_sApocalypseParams.gamma1_medic*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_medic*MedicBusyFlockingVector();
       Flock(forces);
    }
