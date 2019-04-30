@@ -75,9 +75,10 @@ public:
    {
       Real CuringDistance;
       Real CuringTime;
-      Real alpha;
-      Real beta;
-
+      Real alpha_medic;
+      Real beta_medic;
+      Real gamma1_medic;
+      Real gamma2_medic;
       void Init(TConfigurationNode &t_node);
    };
 
@@ -126,7 +127,7 @@ private:
    /*
     * Lets the robot perform flocking.
     */
-   void Flock();
+   void Flock(CVector2);
 
    /*
     * Calculates the vector to the closest light.
@@ -149,7 +150,8 @@ private:
     */
    CVector2 HealthyFlockingVector();
    CVector2 InfectedFlockingVector();
-
+   CVector2 MedicFreeFlockingVector();
+   CVector2 MedicBusyFlockingVector();
    bool SearchForInfected();
 
 private:

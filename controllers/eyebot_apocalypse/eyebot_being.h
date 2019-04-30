@@ -83,8 +83,12 @@ public:
       Real InfectionPercentage;
       Real alpha_healthy;
       Real beta_healthy;
+      Real gamma1_healthy;
+      Real gamma2_healthy;
       Real alpha_infected;
       Real beta_infected;
+      Real gamma1_infected;
+      Real gamma2_infected;
 
       void Init(TConfigurationNode &t_node);
    };
@@ -124,7 +128,9 @@ public:
     * In this example controller there is no need for clean anything up, so
     * the function could have been omitted. It's here just for completeness.
     */
-   virtual void Destroy() {}
+   virtual void Destroy() {
+
+   }
 
 private:
    /*
@@ -149,8 +155,9 @@ private:
     */
    CVector2 HealthyFlockingVector();
    CVector2 InfectedFlockingVector();
-   CVector2 MedicFlockingVector();
-
+   CVector2 MedicBusyFlockingVector();
+   CVector2 MedicFreeFlockingVector();
+   bool SeachForCure();
    void HealthyBehavior();
 
    void InfectedBehavior();
@@ -162,6 +169,7 @@ private:
    void Die();
    
    void MainBehavior();
+   CVector2 myNormalize(CVector2);
 
 private:
    /* Current robot state */
