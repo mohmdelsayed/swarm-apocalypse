@@ -62,11 +62,11 @@ public:
    {
       /* Target robot-robot distance in cm */
       Real TargetDistance;
-      /* Gain of the Lennard-Jones potential */
+      /* Attraction weight of the Lennard-Jones potential */
       Real Gain;
       /* Exponent of the Lennard-Jones potential */
       Real Exponent;
-      /* Max length for the resulting interaction force vector */
+      /* Max length for the light interaction force vector */
       Real MaxInteraction;
 
       void Init(TConfigurationNode &t_node);
@@ -75,24 +75,37 @@ public:
 
    struct SApocalypseParams
    {
+      /* The time needed for the symptoms to appear on the infected agent */
       Real InfectionStart;
+      /* The time needed after infection for the infected agent to die */
       Real InfectionTerminal;
+      /* The minimum distance needed to infect a healthy agent */
       Real InfectionDistance;
+      /* The minimum distance for a medic to cure an infected agent */
       Real CuringDistance;
+      /* The minimum time needed for curing to be done */
       Real CuringTime;
+      /* The percentage of the population that is infected */
       Real InfectionPercentage;
+      /* Weight of interaction between healthy and healthy agents */
       Real alpha_healthy;
+      /* Weight of interaction between healthy and infected agents */
       Real beta_healthy;
+      /* Weight of interaction between healthy and free medic agents */
       Real gamma1_healthy;
+      /* Weight of interaction between healthy and busy medic agents */
       Real gamma2_healthy;
+      /* Weight of interaction between infected and healthy agents */
       Real alpha_infected;
+      /* Weight of interaction between infected and infected agents */
       Real beta_infected;
+      /* Weight of interaction between infected and free medic agents */
       Real gamma1_infected;
+      /* Weight of interaction between infected and busy medic agents */
       Real gamma2_infected;
 
       void Init(TConfigurationNode &t_node);
    };
-
 
 
 public:
@@ -137,39 +150,66 @@ private:
     * Takes off the robot.
     */
    void TakeOff();
-
    /*
-    * Lets the robot perform flocking.
+    * Calculates overall interaction between agents and moves the agent towards the resultant
     */
    void Flock(CVector2);
-
    /*
     * Calculates the vector to the closest light.
     * Used by Flock().
     */
    CVector2 VectorToLight();
-
    /*
-    * Calculates the flocking interaction vector.
+    * Calculates the flocking interaction vector for Healthy agents.
     * Used by Flock().
     */
    CVector2 HealthyFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for infected agents.
+    * Used by Flock().
+    */
    CVector2 InfectedFlockingVector();
-   CVector2 MedicBusyFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for free medic agents.
+    * Used by Flock().
+    */
    CVector2 MedicFreeFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for busy medic agents.
+    * Used by Flock().
+    */
+   CVector2 MedicBusyFlockingVector();
+   /*
+    * Search for any cure sent by a medic agent in the neighborhood.
+    * Used by InfectedBehavior().
+    */
    bool SeachForCure();
+   /*
+    * Initiate Healthy Behavior for infected agent
+    */
    void HealthyBehavior();
-
+   /*
+    * Initiate Infected Behavior for healthy agent
+    */
    void InfectedBehavior();
-
+   /*
+    * Search for any infected agent in the neighborhood.
+    * Used by HealthyBehavior().
+    */
    bool SearchForInfected();
-
+   /*
+    * Search for any curing signal sent by a medic agent in the neighborhood.
+    * Used by InfectedBehavior().
+    */
    bool SearchForMedicSignal();
-
+   /*
+    * Initiate Death Behavior for infected agent
+    */
    void Die();
-   
+   /*
+    * Main behavior of eyebot being
+    */
    void MainBehavior();
-   CVector2 myNormalize(CVector2);
 
 private:
    /* Current robot state */
@@ -179,7 +219,7 @@ private:
       STATE_TAKE_OFF,
       STATE_FLOCK
    };
-
+   /* Current medic state */
    enum MState
    {
       STATE_FREE = 1,
@@ -212,14 +252,12 @@ private:
    CCI_EyeBotLightSensor *m_pcLightSens;
    /* Pointer to the positioning sensor */
    CCI_PositioningSensor *m_pcPosSens;
-
+   /* Pointer to the LEDs actuator */
    CCI_LEDsActuator* m_pcLEDs;
-
    /* The flocking interaction parameters. */
    SFlockingInteractionParams m_sFlockingParams;
    /* The Apocalypse parameters. */
    SApocalypseParams m_sApocalypseParams;
-
    /* Current robot state */
    EState m_eState;
    /* Current robot Health State */

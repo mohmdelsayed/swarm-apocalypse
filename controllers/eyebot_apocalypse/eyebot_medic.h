@@ -60,11 +60,11 @@ public:
    {
       /* Target robot-robot distance in cm */
       Real TargetDistance;
-      /* Gain of the Lennard-Jones potential */
+      /* Attraction weight of the Lennard-Jones potential */
       Real Gain;
       /* Exponent of the Lennard-Jones potential */
       Real Exponent;
-      /* Max length for the resulting interaction force vector */
+      /* Max length for the light interaction force vector */
       Real MaxInteraction;
 
       void Init(TConfigurationNode &t_node);
@@ -73,11 +73,17 @@ public:
 
    struct SApocalypseParams
    {
+      /* The minimum distance for medic to cure an infected agent */
       Real CuringDistance;
+      /* The minimum time needed for curing to be done */
       Real CuringTime;
+      /* Weight of interaction between medic and healthy agents */
       Real alpha_medic;
+      /* Weight of interaction between medic and infected agents */
       Real beta_medic;
+      /* Weight of interaction between medic and free medic agents */
       Real gamma1_medic;
+      /* Weight of interaction between medic and busy medic agents */
       Real gamma2_medic;
       void Init(TConfigurationNode &t_node);
    };
@@ -123,35 +129,51 @@ private:
     * Takes off the robot.
     */
    void TakeOff();
-
    /*
-    * Lets the robot perform flocking.
+    * Calculates overall interaction between agents and moves the agent towards the resultant
     */
    void Flock(CVector2);
-
    /*
     * Calculates the vector to the closest light.
     * Used by Flock().
     */
    CVector2 VectorToLight();
-
-   /* Main behavior of medic */
-   void MainBehavior();
-
    /*
-    * Do the normal function which is to cure
+    * Main behavior of medic
+    */
+   void MainBehavior();
+   /*
+    * Initiate Curing Behavior for medic agent
     */
    void CuringBehavior();
-
+   /*
+    * Initiate Advertising Behavior for medic agent
+    */
    void AdvertisingBehavior();
    /*
-    * Calculates the flocking interaction vector.
+    * Calculates the flocking interaction vector for Healthy agents.
     * Used by Flock().
     */
    CVector2 HealthyFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for infected agents.
+    * Used by Flock().
+    */
    CVector2 InfectedFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for free medic agents.
+    * Used by Flock().
+    */
    CVector2 MedicFreeFlockingVector();
+   /*
+    * Calculates the flocking interaction vector for busy medic agents.
+    * Used by Flock().
+    */
    CVector2 MedicBusyFlockingVector();
+   /*
+    * Search for any infected agent in the neighborhood.
+    * Used by AdvertisingBehavior().
+    */
    bool SearchForInfected();
 
 private:
@@ -162,6 +184,7 @@ private:
       STATE_TAKE_OFF,
       STATE_FLOCK
    };
+   /* Current medic state */
    enum MState
    {
       STATE_FREE = 1,
@@ -208,7 +231,6 @@ private:
    IState m_IState;
    /* Curing Time */
    Real TotalCuringTime;
-
    /* Current target position */
    CVector3 m_cTargetPos;
 };

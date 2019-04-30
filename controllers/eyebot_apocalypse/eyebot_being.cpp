@@ -29,7 +29,6 @@ void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode &t_node)
    }
 }
 
-
 /****************************************/
 /****************************************/
 
@@ -168,9 +167,7 @@ void CEyeBotBeing::ControlStep()
 {
 
    /* Important Note */
-   
-   /*
-      channel 0 is for taking off:
+   /* channel 0 is for taking off:
       m_pcRABAct->SetData(0, STATE_START);
       m_pcRABAct->SetData(0, STATE_TAKE_OFF);
       m_pcRABAct->SetData(0, STATE_FLOCK);
@@ -186,9 +183,8 @@ void CEyeBotBeing::ControlStep()
 
       channel 3 is for curing signals:
       m_pcRABAct->SetData(3, STATE_CURING);
-      m_pcRABAct->SetData(3, STATE_CURED);
-
-   */
+      m_pcRABAct->SetData(3, STATE_CURED);   */
+      
    switch (m_eState)
    {
    case STATE_START:
@@ -667,7 +663,7 @@ void CEyeBotBeing::Die()
                 -10.0f));
    this->Destroy();
 }
-
+/*
 CVector2 CEyeBotBeing::myNormalize(CVector2 x){
    if (x.Length() == 0){
       return CVector2(0,0);
@@ -676,6 +672,7 @@ CVector2 CEyeBotBeing::myNormalize(CVector2 x){
       return x/x.Length();
    }
 }
+*/
 
 /*
  * This statement notifies ARGoS of the existence of the controller.
