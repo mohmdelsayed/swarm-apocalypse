@@ -36,14 +36,14 @@
                   gamma2_healthy = "-0.1"
                   alpha_infected = "-0.1"
                   beta_infected = "0.1"
-                  gamma1_infected = "0.1"
+                  gamma1_infected = "1"
                   gamma2_infected = "-0.1"
-                  InfectionPercentage="0.1"
+                  InfectionPercentage="1"
                   InfectionStart="0"
                   InfectionTerminal="20000"
                   InfectionDistance="200"
-                  CuringDistance = "200"
-                  CuringTime = "150" />
+                  CuringDistance = "400"
+                  CuringTime = "50" />
 
         <flocking target_distance="250"
                   gain="0.55"
@@ -69,10 +69,10 @@
       <params>
         <apocalypse alpha_medic = "-0.1"
                   beta_medic = "0.1"
-                  gamma1_medic = "0.1"
+                  gamma1_medic = "1"
                   gamma2_medic = "-0.1"
-                  CuringDistance = "0"
-                  CuringTime = "150" />
+                  CuringDistance = "400"
+                  CuringTime = "50" />
 
         <flocking target_distance="250"
                   gain="0.55"
@@ -92,7 +92,7 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="50" max_trials="1000">
+      <entity quantity="1" max_trials="1000">
         <eye-bot id="eb_being" rab_range="10">
           <controller config="being" />
         </eye-bot>
@@ -102,7 +102,7 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="5" max_trials="1000">
+      <entity quantity="1" max_trials="1000">
         <eye-bot id="eb_medic" rab_range="10">
           <controller config="medic" />
         </eye-bot>

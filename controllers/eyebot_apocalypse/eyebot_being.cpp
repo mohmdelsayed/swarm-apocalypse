@@ -505,15 +505,16 @@ CVector2 CEyeBotBeing::MedicBusyFlockingVector()
 
 void CEyeBotBeing::InfectedBehavior()
 {
-   if (SearchForMedicSignal() == true)
-   {
+   if (SearchForMedicSignal())
+   {  LOG << "Entered 1st if" << std::endl;
       LOG << "I am cured! Thank you!" << std::endl;
       m_HState = STATE_HEALTHY;
       // m_pcRABAct->SetData(1, STATE_HEALTHY); == > (TODO): if published STATE_HEALTHY agents can infect you!
    }
 
-   if (SeachForCure() == true)
+   if (m_HState == STATE_INFECTED && SeachForCure())
    {
+      LOG << "Entered 2nd if" << std::endl;
       LOG << "I am being cured!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
@@ -521,8 +522,8 @@ void CEyeBotBeing::InfectedBehavior()
 
 
 
-   if (InfectionTime < m_sApocalypseParams.InfectionStart && m_HState == STATE_INFECTED)
-   {
+   if (!SearchForMedicSignal() && !SeachForCure() && InfectionTime < m_sApocalypseParams.InfectionStart && m_HState == STATE_INFECTED)
+   {  LOG << "Entered 3rd if" << std::endl;
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
@@ -531,15 +532,14 @@ void CEyeBotBeing::InfectedBehavior()
       InfectionTime += 1;
    }
 
-   if (InfectionTime >= m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal && m_HState == STATE_INFECTED)
-   {
+   if (!SeachForCure() && InfectionTime >= m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal && m_HState == STATE_INFECTED)
+   {  LOG << "Entered 4th if" << std::endl;
       LOGERR << "I am Infected!" << std::endl;
       m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
       CVector2 forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + m_sApocalypseParams.beta_infected*InfectedFlockingVector() + m_sApocalypseParams.gamma1_infected*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_infected*MedicBusyFlockingVector();
       Flock(forces);
       InfectionTime += 1;
-
    }
 
    if (InfectionTime >= m_sApocalypseParams.InfectionTerminal)
@@ -588,7 +588,7 @@ bool CEyeBotBeing::SearchForMedicSignal()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[3] == STATE_CURED)
+         if (tMsgs[i].Data[4] == STATE_CURED)
          {
             return true;
          }

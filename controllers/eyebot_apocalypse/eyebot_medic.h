@@ -233,6 +233,7 @@ private:
    Real TotalCuringTime;
    /* Current target position */
    CVector3 m_cTargetPos;
+   bool StopToCure;
 };
 
 #endif

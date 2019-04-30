@@ -476,21 +476,22 @@ CVector2 CEyeBotMedic::MedicBusyFlockingVector()
 
 void CEyeBotMedic::CuringBehavior()
 {
-   LOG << "I am curing!" << std::endl;
    m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
 
-   if (TotalCuringTime < m_sApocalypseParams.CuringTime)
+   if (TotalCuringTime < m_sApocalypseParams.CuringTime /*&& StopToCure*/)
    {
       m_pcRABAct->SetData(3, STATE_CURING);
       TotalCuringTime = TotalCuringTime + 1;
+      LOG << "I am curing!" << std::endl;
    }
    else
    {
-      LOGERR << "You are cured" << std::endl;
+      LOG << "You are cured" << std::endl;
       m_MState = STATE_FREE;
       m_pcRABAct->SetData(2, STATE_FREE);
-      m_pcRABAct->SetData(3, STATE_CURED);
+      m_pcRABAct->SetData(4, STATE_CURED);
+      //StopToCure = false;
    }
 }
 
@@ -507,7 +508,16 @@ void CEyeBotMedic::AdvertisingBehavior()
    {
       TotalCuringTime = 0;
       CuringBehavior();
+      //StopToCure = true;
    }
+/*
+   if (StopToCure)
+   {  
+      TotalCuringTime = 0;
+      CuringBehavior();
+   }
+*/
+   
    else
    {
       CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + m_sApocalypseParams.beta_medic*InfectedFlockingVector() + m_sApocalypseParams.gamma1_medic*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_medic*MedicBusyFlockingVector();
