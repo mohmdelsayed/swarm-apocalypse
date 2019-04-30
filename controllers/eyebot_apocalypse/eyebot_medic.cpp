@@ -59,8 +59,6 @@ Real CEyeBotMedic::SFlockingInteractionParams::GeneralizedLennardJones(Real f_di
 {
    Real fNormDistExp = ::pow(TargetDistance / f_distance, Exponent);
    return -1* (fNormDistExp * fNormDistExp - Gain*fNormDistExp);
-   //    Real fNorm = ::pow((1-exp(-Exponent*(f_distance-TargetDistance))),2);
-   // return  -Gain *fNorm;
 }
 
 /****************************************/
@@ -133,7 +131,7 @@ void CEyeBotMedic::Reset()
    /* Tell robots around that this robot is starting */
    m_pcRABAct->SetData(0, STATE_START);
    /* Initially the medic is not curing anyone */
-   m_pcRABAct->SetData(2, STATE_FREE);            //=========== > strange behavior when removed
+   m_pcRABAct->SetData(2, STATE_FREE);                // TODO =========== > strange behavior when removed
    m_MState = STATE_FREE;
 }
 
@@ -255,7 +253,7 @@ CVector2 CEyeBotMedic::VectorToLight()
    {
       /* Make the vector long as 1/10 of the max speed */
       cAccum.Normalize();
-      cAccum *= 0.1f * m_sFlockingParams.MaxInteraction;
+      cAccum *= m_sFlockingParams.MaxInteraction;
    }
    return cAccum;
 }
@@ -302,12 +300,6 @@ CVector2 CEyeBotMedic::HealthyFlockingVector()
       {
          /* Divide the accumulator by the number of flocking neighbors */
          cAccum /= unPeers;
-         /* Limit the interaction force */
-         // if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
-         // {
-         //    cAccum.Normalize();
-         //    cAccum *= m_sFlockingParams.MaxInteraction;
-         // }
       }
       /* All done */
       return cAccum;
@@ -362,12 +354,6 @@ CVector2 CEyeBotMedic::InfectedFlockingVector()
       {
          /* Divide the accumulator by the number of flocking neighbors */
          cAccum /= unPeers;
-         /* Limit the interaction force */
-         // if (cAccum.Length() > m_sFlockingParams.MaxInteraction)
-         // {
-         //    cAccum.Normalize();
-         //    cAccum *= m_sFlockingParams.MaxInteraction;
-         // }
       }
       /* All done */
       return cAccum;
@@ -421,12 +407,6 @@ CVector2 CEyeBotMedic::MedicFreeFlockingVector()
       {
          /* Divide the accumulator by the number of flocking neighbors */
          cAccum /= unPeers;
-         /* Limit the interaction force */
-         // if (cAccum.Length() > m_sFlockingParams.MaxInteraction && m_sFlockingParams.MaxInteraction != 0)
-         // {
-         //    cAccum.Normalize();
-         //    // cAccum *= m_sFlockingParams.MaxInteraction;
-         // }
       }
       /* All done */
       return cAccum;
@@ -480,12 +460,6 @@ CVector2 CEyeBotMedic::MedicBusyFlockingVector()
       {
          /* Divide the accumulator by the number of flocking neighbors */
          cAccum /= unPeers;
-         /* Limit the interaction force */
-         // if (cAccum.Length() > m_sFlockingParams.MaxInteraction && m_sFlockingParams.MaxInteraction != 0)
-         // {
-         //    cAccum.Normalize();
-         //    // cAccum *= m_sFlockingParams.MaxInteraction;
-         // }
       }
       /* All done */
       return cAccum;
@@ -502,7 +476,6 @@ CVector2 CEyeBotMedic::MedicBusyFlockingVector()
 
 void CEyeBotMedic::CuringBehavior()
 {
-   m_pcLEDs->SetAllColors(CColor::BLUE);
    LOG << "I am curing!" << std::endl;
    m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
@@ -519,7 +492,6 @@ void CEyeBotMedic::CuringBehavior()
       m_pcRABAct->SetData(2, STATE_FREE);
       m_pcRABAct->SetData(3, STATE_CURED);
    }
-   //m_pcLEDs->SetAllColors(CColor::WHITE);
 }
 
 /****************************************/
@@ -527,8 +499,6 @@ void CEyeBotMedic::CuringBehavior()
 
 void CEyeBotMedic::AdvertisingBehavior()
 {
-   m_pcLEDs->SetAllColors(CColor::GREEN);
-
    m_MState = STATE_FREE;
    LOGERR << "I am a Doctor!" << std::endl;
    m_pcRABAct->SetData(2, STATE_FREE);
