@@ -55,7 +55,7 @@ include loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.di
 
 loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target id_loop_functions"
-	cd /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/ Release
+	cd /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/ ""
 
 id_loop_functions_automoc: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc
 id_loop_functions_automoc: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make

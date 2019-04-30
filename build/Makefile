@@ -111,58 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named eyebot_circle
-
-# Build rule for target.
-eyebot_circle: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 eyebot_circle
-.PHONY : eyebot_circle
-
-# fast build rule for target.
-eyebot_circle/fast:
-	$(MAKE) -f controllers/eyebot_circle/CMakeFiles/eyebot_circle.dir/build.make controllers/eyebot_circle/CMakeFiles/eyebot_circle.dir/build
-.PHONY : eyebot_circle/fast
-
-#=============================================================================
-# Target rules for targets named eyebot_circle_automoc
-
-# Build rule for target.
-eyebot_circle_automoc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 eyebot_circle_automoc
-.PHONY : eyebot_circle_automoc
-
-# fast build rule for target.
-eyebot_circle_automoc/fast:
-	$(MAKE) -f controllers/eyebot_circle/CMakeFiles/eyebot_circle_automoc.dir/build.make controllers/eyebot_circle/CMakeFiles/eyebot_circle_automoc.dir/build
-.PHONY : eyebot_circle_automoc/fast
-
-#=============================================================================
-# Target rules for targets named eyebot_flocking
-
-# Build rule for target.
-eyebot_flocking: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 eyebot_flocking
-.PHONY : eyebot_flocking
-
-# fast build rule for target.
-eyebot_flocking/fast:
-	$(MAKE) -f controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/build.make controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/build
-.PHONY : eyebot_flocking/fast
-
-#=============================================================================
-# Target rules for targets named eyebot_flocking_automoc
-
-# Build rule for target.
-eyebot_flocking_automoc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 eyebot_flocking_automoc
-.PHONY : eyebot_flocking_automoc
-
-# fast build rule for target.
-eyebot_flocking_automoc/fast:
-	$(MAKE) -f controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/build.make controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/build
-.PHONY : eyebot_flocking_automoc/fast
-
-#=============================================================================
 # Target rules for targets named eyebot_medic
 
 # Build rule for target.
@@ -248,10 +196,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... eyebot_circle"
-	@echo "... eyebot_circle_automoc"
-	@echo "... eyebot_flocking"
-	@echo "... eyebot_flocking_automoc"
 	@echo "... eyebot_medic"
 	@echo "... eyebot_being"
 	@echo "... eyebot_medic_automoc"

@@ -54,11 +54,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.5.1/CMakeSystem.cmake"
   "CMakeFiles/feature_tests.c"
   "CMakeFiles/feature_tests.cxx"
-  "../cmake/FindGALIB.cmake"
   "../controllers/CMakeLists.txt"
   "../controllers/eyebot_apocalypse/CMakeLists.txt"
-  "../controllers/eyebot_circle/CMakeLists.txt"
-  "../controllers/eyebot_flocking/CMakeLists.txt"
   "../embedding/CMakeLists.txt"
   "../loop_functions/CMakeLists.txt"
   "../loop_functions/id_loop_functions/CMakeLists.txt"
@@ -165,8 +162,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/3.5.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "controllers/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "controllers/eyebot_circle/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "controllers/eyebot_flocking/CMakeFiles/CMakeDirectoryInformation.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/CMakeDirectoryInformation.cmake"
   "loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
   "loop_functions/id_loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
@@ -175,10 +170,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "controllers/eyebot_circle/CMakeFiles/eyebot_circle.dir/DependInfo.cmake"
-  "controllers/eyebot_circle/CMakeFiles/eyebot_circle_automoc.dir/DependInfo.cmake"
-  "controllers/eyebot_flocking/CMakeFiles/eyebot_flocking.dir/DependInfo.cmake"
-  "controllers/eyebot_flocking/CMakeFiles/eyebot_flocking_automoc.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_being.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/DependInfo.cmake"
