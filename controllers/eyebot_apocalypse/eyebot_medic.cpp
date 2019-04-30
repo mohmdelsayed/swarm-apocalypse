@@ -255,7 +255,7 @@ CVector2 CEyeBotMedic::VectorToLight()
    {
       /* Make the vector long as 1/10 of the max speed */
       cAccum.Normalize();
-      cAccum *= m_sFlockingParams.MaxInteraction;
+      cAccum *= 0.1f*m_sFlockingParams.MaxInteraction;
    }
    return cAccum;
 }

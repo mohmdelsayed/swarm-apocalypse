@@ -573,7 +573,7 @@ bool CEyeBotBeing::SeachForCure(){
          /*
           * We consider only the neighbors in state flock
           */
-         LOG << "Curing Time is " << CurrentCuringTime << std::endl;
+         //LOG << "Curing Time is " << CurrentCuringTime << std::endl;
          if (tMsgs[i].Data[3] == STATE_CURING && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime < m_sApocalypseParams.CuringTime)
          {
             CurrentCuringTime++;
