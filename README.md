@@ -53,3 +53,14 @@ and type:
 ```
 $ argos3 -c experiments/eyebot_apocalypse.argos
 ```
+
+## Experiment #1:
+In this experiment, we experiment with only healthy agents. The target of the experiment is to test the Lennard-Jones model with different parameters to identify the best parameters for simulation.
+
+
+## Experiment #2:
+In this experiment, we experiment with only healthy and infected agents. The target of the experiment is to test the interaction between them. Different parameters are considered in this experiment such as symptoms infection time, terminal infection time, infection distance, and population infection percentage.
+
+
+## Experiment #3:
+In this experiment, we experiment with medic, healthy, and infected agents. The target of the experiment is to test the effect of adding medics on the population and how to make them survive. Different parameters are considered such as curing distance and curing time.
