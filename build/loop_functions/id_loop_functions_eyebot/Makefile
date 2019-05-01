@@ -80,14 +80,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/mohamed/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions/CMakeFiles/progress.marks
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/all
+	cd /home/mohamed/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles /home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/progress.marks
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/mohamed/swarm-apocalypse/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/clean
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,12 +97,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/preinstall
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/preinstall
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -111,33 +111,33 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule
-.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/rule:
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/rule
+.PHONY : loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/rule
 
 # Convenience name for target.
-id_loop_functions: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/rule
+id_loop_functions: loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/rule
 
 .PHONY : id_loop_functions
 
 # fast build rule for target.
 id_loop_functions/fast:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build
 .PHONY : id_loop_functions/fast
 
 # Convenience name for target.
-loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule
-.PHONY : loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/rule:
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f CMakeFiles/Makefile2 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/rule
+.PHONY : loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/rule
 
 # Convenience name for target.
-id_loop_functions_automoc: loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/rule
+id_loop_functions_automoc: loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/rule
 
 .PHONY : id_loop_functions_automoc
 
 # fast build rule for target.
 id_loop_functions_automoc/fast:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build
 .PHONY : id_loop_functions_automoc/fast
 
 id_loop_functions_automoc.o: id_loop_functions_automoc.cpp.o
@@ -146,7 +146,7 @@ id_loop_functions_automoc.o: id_loop_functions_automoc.cpp.o
 
 # target to build an object file
 id_loop_functions_automoc.cpp.o:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o
 .PHONY : id_loop_functions_automoc.cpp.o
 
 id_loop_functions_automoc.i: id_loop_functions_automoc.cpp.i
@@ -155,7 +155,7 @@ id_loop_functions_automoc.i: id_loop_functions_automoc.cpp.i
 
 # target to preprocess a source file
 id_loop_functions_automoc.cpp.i:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.i
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.i
 .PHONY : id_loop_functions_automoc.cpp.i
 
 id_loop_functions_automoc.s: id_loop_functions_automoc.cpp.s
@@ -164,7 +164,7 @@ id_loop_functions_automoc.s: id_loop_functions_automoc.cpp.s
 
 # target to generate assembly for a file
 id_loop_functions_automoc.cpp.s:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.s
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.s
 .PHONY : id_loop_functions_automoc.cpp.s
 
 id_qtuser_functions.o: id_qtuser_functions.cpp.o
@@ -173,7 +173,7 @@ id_qtuser_functions.o: id_qtuser_functions.cpp.o
 
 # target to build an object file
 id_qtuser_functions.cpp.o:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o
 .PHONY : id_qtuser_functions.cpp.o
 
 id_qtuser_functions.i: id_qtuser_functions.cpp.i
@@ -182,7 +182,7 @@ id_qtuser_functions.i: id_qtuser_functions.cpp.i
 
 # target to preprocess a source file
 id_qtuser_functions.cpp.i:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.i
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.i
 .PHONY : id_qtuser_functions.cpp.i
 
 id_qtuser_functions.s: id_qtuser_functions.cpp.s
@@ -191,7 +191,7 @@ id_qtuser_functions.s: id_qtuser_functions.cpp.s
 
 # target to generate assembly for a file
 id_qtuser_functions.cpp.s:
-	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.s
+	cd /home/mohamed/swarm-apocalypse/build && $(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.s
 .PHONY : id_qtuser_functions.cpp.s
 
 # Help Target

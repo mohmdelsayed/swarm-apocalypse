@@ -172,7 +172,7 @@ id_loop_functions: cmake_check_build_system
 
 # fast build rule for target.
 id_loop_functions/fast:
-	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions.dir/build
+	$(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build
 .PHONY : id_loop_functions/fast
 
 #=============================================================================
@@ -185,7 +185,7 @@ id_loop_functions_automoc: cmake_check_build_system
 
 # fast build rule for target.
 id_loop_functions_automoc/fast:
-	$(MAKE) -f loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions/CMakeFiles/id_loop_functions_automoc.dir/build
+	$(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build
 .PHONY : id_loop_functions_automoc/fast
 
 # Help Target

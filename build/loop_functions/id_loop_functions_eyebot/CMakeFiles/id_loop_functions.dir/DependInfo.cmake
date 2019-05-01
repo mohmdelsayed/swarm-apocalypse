@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/mohamed/swarm-apocalypse/controllers/eyebot_apocalypse/eyebot_being.cpp" "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_being.dir/eyebot_being.cpp.o"
-  "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/eyebot_being_automoc.cpp" "/home/mohamed/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_being.dir/eyebot_being_automoc.cpp.o"
+  "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/id_loop_functions_automoc.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o"
+  "/home/mohamed/swarm-apocalypse/loop_functions/id_loop_functions_eyebot/id_qtuser_functions.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -13,13 +13,14 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_TARGET_DEFINITIONS_CXX
   "QT_CORE_LIB"
   "QT_GUI_LIB"
+  "QT_NO_DEBUG"
   "QT_WIDGETS_LIB"
   )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "controllers/eyebot_apocalypse"
-  "../controllers/eyebot_apocalypse"
+  "loop_functions/id_loop_functions_eyebot"
+  "../loop_functions/id_loop_functions_eyebot"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"
   "/usr/include/x86_64-linux-gnu/qt5/QtGui"
@@ -27,7 +28,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"
   "../"
   "/usr/include/lua5.2"
-  "../controllers"
   )
 
 # Targets to which this target links.

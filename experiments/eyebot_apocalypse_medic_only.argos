@@ -48,7 +48,7 @@
         <flocking target_distance="250"
                   AttractionFactor="0.9"
                   exponent="2"
-                  GoalGain="0.35" />
+                  GoalGain="0.035" />
       </params>
     </eyebot_being_controller>
 
@@ -78,7 +78,7 @@
         <flocking target_distance="250"
                   AttractionFactor="0.9"
                   exponent="2"
-                  GoalGain="0.3" /> 
+                  GoalGain="0.03" /> 
 
       </params>
     </eyebot_medic_controller>
@@ -93,8 +93,8 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="0" max_trials="1000">
-        <eye-bot id="eb_being" rab_range="10">
+      <entity quantity="20" max_trials="1000">
+        <eye-bot id="B" rab_range="10">
           <controller config="being" />
         </eye-bot>
       </entity>
@@ -103,8 +103,8 @@
     <distribute>
       <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="50" max_trials="1000">
-        <eye-bot id="eb_medic" rab_range="10">
+      <entity quantity="20" max_trials="1000">
+        <eye-bot id="M" rab_range="10">
           <controller config="medic" />
         </eye-bot>
       </entity>
@@ -149,9 +149,10 @@
       <camera>
         <placement idx="0" position="0,0.192728,22.8506,1" look_at="-0.0395853,0.192728,21.8506" lens_focal_length="20" />
       </camera>
+
+      <user_functions library="build/loop_functions/id_loop_functions_eyebot/libid_loop_functions"
+                      label="id_qtuser_functions" />
     </qt-opengl>
 
-      <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
-                      label="id_qtuser_functions" /> -->
   </visualization>
 </argos-configuration>
