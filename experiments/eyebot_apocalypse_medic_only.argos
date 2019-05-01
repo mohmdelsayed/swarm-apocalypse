@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <!-- fixed seed for reproducable simulations -->
+    <experiment length="0" ticks_per_second="10" random_seed="12345" />
+    <profiling file="simulation_results.txt"
+             format="table"
+             truncate_file="true" />
+  </framework>
+  
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+    <!-- Eye-Being controller -->
+    <eyebot_being_controller id="being" library="build/controllers/eyebot_apocalypse/libeyebot_being.so">
+      <actuators>
+        <quadrotor_position implementation="default" />
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+      </actuators>
+      <sensors> 
+        <positioning implementation="default" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
+      </sensors>
+      <params>
+        <apocalypse alpha_healthy = "0"
+                  beta_healthy = "0"
+                  gamma_healthy = "0"
+                  delta_healthy = "0"
+                  alpha_infected = "0"
+                  beta_infected = "0"
+                  gamma_infected = "0"
+                  delta_infected = "0"
+                  InfectionPercentage="0"
+                  InfectionStart="0"
+                  InfectionTerminal="20000"
+                  InfectionDistance="200"
+                  CuringDistance = "200"
+                  CuringTime = "150" />
+
+        <flocking target_distance="250"
+                  gain="0.9"
+                  exponent="2"
+                  max_interaction="0.35" />
+      </params>
+    </eyebot_being_controller>
+
+
+    <!-- Eye-Medic controller -->
+    <eyebot_medic_controller id="medic" library="build/controllers/eyebot_apocalypse/libeyebot_medic.so">
+      <actuators>
+        <quadrotor_position implementation="default" />
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+
+      </actuators>
+      <sensors>
+        <positioning implementation="default" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
+      </sensors>
+      <params>
+        <apocalypse
+                  alpha_medic = "0"
+                  beta_medic = "0"
+                  gamma_medic = "1"
+                  delta_medic = "0"
+                  CuringDistance = "0"
+                  CuringTime = "0" />
+
+        <flocking target_distance="250"
+                  gain="0.9"
+                  exponent="2"
+                  max_interaction="0.3" /> 
+
+      </params>
+    </eyebot_medic_controller>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="60, 60, 5" center="0, 0, 2.5">
+    <light id="l" position="20,20,3" orientation="0,0,0" color="white" intensity="20" medium="light" />
+    <distribute>
+      <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
+      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
+      <entity quantity="0" max_trials="1000">
+        <eye-bot id="eb_being" rab_range="10">
+          <controller config="being" />
+        </eye-bot>
+      </entity>
+    </distribute>
+
+    <distribute>
+      <position method="uniform" min="-25,-25,0" max="-5,-5,0" />
+      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
+      <entity quantity="50" max_trials="1000">
+        <eye-bot id="eb_medic" rab_range="10">
+          <controller config="medic" />
+        </eye-bot>
+      </entity>
+    </distribute>
+
+        <!-- Distribute 50 entities in a 4x4 grid on the ground, all facing along the X axis -->
+    <!-- <distribute>
+      <position method="grid"
+                center="-25,-25,0"
+                distances="1,1,0"
+                layout="8,8,1" />
+      <orientation method="constant" values="0,0,0" />
+      <entity quantity="64" max_trials="1000">
+        <eye-bot id="eb_being" rab_range="10">
+          <controller config="being" />
+        </eye-bot>
+      </entity>
+    </distribute> -->
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <pointmass3d id="pm3d" iterations="10" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" />
+    <led id="leds" />
+    <led id="light" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <camera>
+        <placement idx="0" position="0,0.192728,22.8506,1" look_at="-0.0395853,0.192728,21.8506" lens_focal_length="20" />
+      </camera>
+    </qt-opengl>
+
+      <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
+                      label="id_qtuser_functions" /> -->
+  </visualization>
+</argos-configuration>
