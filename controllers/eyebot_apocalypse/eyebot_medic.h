@@ -61,11 +61,11 @@ public:
       /* Target robot-robot distance in cm */
       Real TargetDistance;
       /* Attraction weight of the Lennard-Jones potential */
-      Real Gain;
+      Real AttractionFactor;
       /* Exponent of the Lennard-Jones potential */
       Real Exponent;
       /* Max length for the light interaction force vector */
-      Real MaxInteraction;
+      Real GoalGain;
 
       void Init(TConfigurationNode &t_node);
       Real GeneralizedLennardJones(Real f_distance);
@@ -82,9 +82,9 @@ public:
       /* Weight of interaction between medic and infected agents */
       Real beta_medic;
       /* Weight of interaction between medic and free medic agents */
-      Real gamma1_medic;
+      Real gamma_medic;
       /* Weight of interaction between medic and busy medic agents */
-      Real gamma2_medic;
+      Real delta_medic;
       void Init(TConfigurationNode &t_node);
    };
 
@@ -196,6 +196,7 @@ private:
    {
       STATE_HEALTHY = 1,
       STATE_INFECTED,
+      STATE_BEING_CURED,
       STATE_DEAD
    };
 
@@ -233,6 +234,7 @@ private:
    Real TotalCuringTime;
    /* Current target position */
    CVector3 m_cTargetPos;
+   /* Flag to know when to stop curing */
    bool StopToCure = false;
 };
 

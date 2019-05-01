@@ -19,9 +19,9 @@ void CEyeBotMedic::SFlockingInteractionParams::Init(TConfigurationNode &t_node)
    try
    {
       GetNodeAttribute(t_node, "target_distance", TargetDistance);
-      GetNodeAttribute(t_node, "gain", Gain);
+      GetNodeAttribute(t_node, "AttractionFactor", AttractionFactor);
       GetNodeAttribute(t_node, "exponent", Exponent);
-      GetNodeAttribute(t_node, "max_interaction", MaxInteraction);
+      GetNodeAttribute(t_node, "GoalGain", GoalGain);
    }
    catch (CARGoSException &ex)
    {
@@ -40,8 +40,8 @@ void CEyeBotMedic::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
       GetNodeAttribute(t_node, "alpha_medic", alpha_medic);
       GetNodeAttribute(t_node, "beta_medic", beta_medic);
-      GetNodeAttribute(t_node, "gamma1_medic", gamma1_medic);
-      GetNodeAttribute(t_node, "gamma2_medic", gamma2_medic);
+      GetNodeAttribute(t_node, "gamma_medic", gamma_medic);
+      GetNodeAttribute(t_node, "delta_medic", delta_medic);
    }
    catch (CARGoSException &ex)
    {
@@ -58,7 +58,7 @@ void CEyeBotMedic::SApocalypseParams::Init(TConfigurationNode &t_node)
 Real CEyeBotMedic::SFlockingInteractionParams::GeneralizedLennardJones(Real f_distance)
 {
    Real fNormDistExp = ::pow(TargetDistance / f_distance, Exponent);
-   return -1* (fNormDistExp * fNormDistExp - Gain*fNormDistExp);
+   return -1* (fNormDistExp * fNormDistExp - AttractionFactor*fNormDistExp);
 }
 
 /****************************************/
@@ -131,7 +131,7 @@ void CEyeBotMedic::Reset()
    /* Tell robots around that this robot is starting */
    m_pcRABAct->SetData(0, STATE_START);
    /* Initially the medic is not curing anyone */
-   m_pcRABAct->SetData(2, STATE_FREE);                // TODO =========== > strange behavior when removed
+   m_pcRABAct->SetData(2, STATE_FREE);
    m_MState = STATE_FREE;
 }
 
@@ -192,7 +192,7 @@ void CEyeBotMedic::MainBehavior()
       AdvertisingBehavior();
    }
    else {
-      LOG << "Unknown State" << std::endl;
+      LOGERR << "Unknown State" << std::endl;
    }
 }
 
@@ -215,7 +215,10 @@ void CEyeBotMedic::TakeOff()
    if (Distance(m_cTargetPos, m_pcPosSens->GetReading().Position) < POSITIONING_TOLERANCE)
    {
       /* State transition */
-      CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + m_sApocalypseParams.beta_medic*InfectedFlockingVector() + m_sApocalypseParams.gamma1_medic*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_medic*MedicBusyFlockingVector();
+      CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + 
+                        m_sApocalypseParams.beta_medic*InfectedFlockingVector() + 
+                        m_sApocalypseParams.gamma_medic*MedicFreeFlockingVector() + 
+                        m_sApocalypseParams.delta_medic*MedicBusyFlockingVector();
       Flock(forces);
    }
 
@@ -257,7 +260,7 @@ CVector2 CEyeBotMedic::VectorToLight()
    {
       /* Make the vector long as 1/10 of the max speed */
       cAccum.Normalize();
-      cAccum *= 0.1f*m_sFlockingParams.MaxInteraction;
+      cAccum *= m_sFlockingParams.GoalGain;
    }
    return cAccum;
 }
@@ -497,7 +500,6 @@ void CEyeBotMedic::CuringBehavior()
       LOG << "You are cured" << std::endl;
       m_MState = STATE_FREE;
       m_pcRABAct->SetData(4, STATE_CURED);
-      //m_pcRABAct->SetData(2, STATE_FREE);
       StopToCure = true;
       TotalCuringTime = 0;
    }
@@ -516,7 +518,10 @@ void CEyeBotMedic::AdvertisingBehavior()
    {
       m_MState = STATE_BUSY;
    } else {
-      CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + m_sApocalypseParams.beta_medic*InfectedFlockingVector() + m_sApocalypseParams.gamma1_medic*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_medic*MedicBusyFlockingVector();
+      CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + 
+                        m_sApocalypseParams.beta_medic*InfectedFlockingVector() + 
+                        m_sApocalypseParams.gamma_medic*MedicFreeFlockingVector() + 
+                        m_sApocalypseParams.delta_medic*MedicBusyFlockingVector();
       Flock(forces);
    }
    StopToCure = false;

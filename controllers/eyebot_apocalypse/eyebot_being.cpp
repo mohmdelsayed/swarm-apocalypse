@@ -19,9 +19,9 @@ void CEyeBotBeing::SFlockingInteractionParams::Init(TConfigurationNode &t_node)
    try
    {
       GetNodeAttribute(t_node, "target_distance", TargetDistance);
-      GetNodeAttribute(t_node, "gain", Gain);
+      GetNodeAttribute(t_node, "AttractionFactor", AttractionFactor);
       GetNodeAttribute(t_node, "exponent", Exponent);
-      GetNodeAttribute(t_node, "max_interaction", MaxInteraction);
+      GetNodeAttribute(t_node, "GoalGain", GoalGain);
    }
    catch (CARGoSException &ex)
    {
@@ -42,12 +42,12 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "InfectionDistance", InfectionDistance);
       GetNodeAttribute(t_node, "alpha_healthy", alpha_healthy);
       GetNodeAttribute(t_node, "beta_healthy", beta_healthy);
-      GetNodeAttribute(t_node, "gamma1_healthy", gamma1_healthy);
-      GetNodeAttribute(t_node, "gamma2_healthy", gamma2_healthy);
+      GetNodeAttribute(t_node, "gamma_healthy", gamma_healthy);
+      GetNodeAttribute(t_node, "delta_healthy", delta_healthy);
       GetNodeAttribute(t_node, "alpha_infected", alpha_infected);
       GetNodeAttribute(t_node, "beta_infected", beta_infected);
-      GetNodeAttribute(t_node, "gamma1_infected", gamma1_infected);
-      GetNodeAttribute(t_node, "gamma2_infected", gamma2_infected);
+      GetNodeAttribute(t_node, "gamma_infected", gamma_infected);
+      GetNodeAttribute(t_node, "delta_infected", delta_infected);
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
       GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
    }
@@ -66,10 +66,7 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
 Real CEyeBotBeing::SFlockingInteractionParams::GeneralizedLennardJones(Real f_distance)
 {
    Real fNormDistExp = ::pow(TargetDistance / f_distance, Exponent);
-   return -1* (fNormDistExp * fNormDistExp - Gain*fNormDistExp);
-   /* Another option is to use Morse Potential */
-   // Real fNorm = ::pow((1-exp(-Exponent*(f_distance-TargetDistance))),2);
-   // return  -Gain *fNorm;
+   return -1* (fNormDistExp * fNormDistExp - AttractionFactor*fNormDistExp);
 }
 
 /****************************************/
@@ -149,7 +146,6 @@ void CEyeBotBeing::Reset()
 
    Real r = m_pcRNG->Uniform(CRange<Real>(0, 1));
 
-
    if (r > m_sApocalypseParams.InfectionPercentage)
    {
       m_HState = STATE_HEALTHY;
@@ -220,7 +216,7 @@ void CEyeBotBeing::MainBehavior()
       Die();
    }
    else {
-      LOGERR << "Unknown Behavior" << std::endl;
+      LOGERR << "[BUG] Unknown Behavior" << std::endl;
    }
 }
 /****************************************/
@@ -244,9 +240,18 @@ void CEyeBotBeing::TakeOff()
       // /* State transition */
       CVector2 forces;
       if (m_HState == STATE_INFECTED){
-         forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + m_sApocalypseParams.beta_infected*InfectedFlockingVector() + m_sApocalypseParams.gamma1_infected*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_infected*MedicBusyFlockingVector();      } 
+         forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + 
+                  m_sApocalypseParams.beta_infected*InfectedFlockingVector() + 
+                  m_sApocalypseParams.gamma_infected*MedicFreeFlockingVector() + 
+                  m_sApocalypseParams.delta_infected*MedicBusyFlockingVector();      
+         
+      } 
       if (m_HState == STATE_HEALTHY) {
-         forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + m_sApocalypseParams.gamma1_healthy*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_healthy*MedicBusyFlockingVector();      }
+         forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + 
+                  m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + 
+                  m_sApocalypseParams.gamma_healthy*MedicFreeFlockingVector() + 
+                  m_sApocalypseParams.delta_healthy*MedicBusyFlockingVector();
+      }
       Flock(forces);
    }
 }
@@ -287,7 +292,7 @@ CVector2 CEyeBotBeing::VectorToLight()
    {
       /* Make the vector long as 1/10 of the max speed */
       cAccum.Normalize();
-      cAccum *= 0.1f * m_sFlockingParams.MaxInteraction;
+      cAccum *= m_sFlockingParams.GoalGain;
    }
    return cAccum;
 }
@@ -313,7 +318,8 @@ CVector2 CEyeBotBeing::InfectedFlockingVector()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[0] == STATE_FLOCK && (tMsgs[i].Data[1] == STATE_INFECTED || tMsgs[i].Data[1] == STATE_BEING_CURED))
+         if (tMsgs[i].Data[0] == STATE_FLOCK && 
+            (tMsgs[i].Data[1] == STATE_INFECTED || tMsgs[i].Data[1] == STATE_BEING_CURED))
          {
             /*
              * Take the message sender range and horizontal bearing
@@ -524,7 +530,7 @@ void CEyeBotBeing::InfectedBehavior()
    {  
       LOG << "I am cured! Thank you!" << std::endl;
       m_HState = STATE_HEALTHY;
-      m_pcRABAct->SetData(1, STATE_HEALTHY); //== > (TODO): if published STATE_HEALTHY agents can infect you!
+      m_pcRABAct->SetData(1, STATE_HEALTHY);
    }
 
    else if (CuringSignal && !MedicSignal)
@@ -534,20 +540,28 @@ void CEyeBotBeing::InfectedBehavior()
    }
 
 
-   else if (!MedicSignal && !CuringSignal && InfectionTime < m_sApocalypseParams.InfectionStart/* && m_HState == STATE_INFECTED*/)
+   else if (!MedicSignal && !CuringSignal && InfectionTime < m_sApocalypseParams.InfectionStart)
    {  
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
-      CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + m_sApocalypseParams.gamma1_healthy*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_healthy*MedicBusyFlockingVector();
+      CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + 
+                        m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + 
+                        m_sApocalypseParams.gamma_healthy*MedicFreeFlockingVector() + 
+                        m_sApocalypseParams.delta_healthy*MedicBusyFlockingVector();
       Flock(forces);
       InfectionTime += 1;
    }
 
-   else if (!MedicSignal && !CuringSignal && InfectionTime >= m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal/* && m_HState == STATE_INFECTED*/)
+   else if (!MedicSignal && !CuringSignal &&
+            InfectionTime >= m_sApocalypseParams.InfectionStart && 
+            InfectionTime < m_sApocalypseParams.InfectionTerminal)
    {  
       LOGERR << "I am Infected!" << std::endl;
       m_pcRABAct->SetData(1, STATE_INFECTED);
-      CVector2 forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + m_sApocalypseParams.beta_infected*InfectedFlockingVector() + m_sApocalypseParams.gamma1_infected*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_infected*MedicBusyFlockingVector();
+      CVector2 forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + 
+                        m_sApocalypseParams.beta_infected*InfectedFlockingVector() + 
+                        m_sApocalypseParams.gamma_infected*MedicFreeFlockingVector() + 
+                        m_sApocalypseParams.delta_infected*MedicBusyFlockingVector();
       Flock(forces);
       InfectionTime += 1;
    }
@@ -559,7 +573,7 @@ void CEyeBotBeing::InfectedBehavior()
       m_pcRABAct->SetData(1, STATE_DEAD);
    }
    else {
-      LOGERR << "Unknown Behavior" << std::endl;
+      LOGERR << "[BUG] Unknown Behavior" << std::endl;
    }
    MedicSignal = false;
    CuringSignal = false;
@@ -581,7 +595,9 @@ bool CEyeBotBeing::SeachForCure(){
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[3] == STATE_CURING && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime < m_sApocalypseParams.CuringTime - 1)
+         if (tMsgs[i].Data[3] == STATE_CURING && 
+            tMsgs[i].Range < m_sApocalypseParams.CuringDistance && 
+            CurrentCuringTime < m_sApocalypseParams.CuringTime - 1)
          {
             LOG << "Infected Curing Time is " << CurrentCuringTime << std::endl;
             CurrentCuringTime++;
@@ -606,9 +622,9 @@ bool CEyeBotBeing::SearchForMedicSignal()
          /*
           * We consider only the neighbors in state flock
           */
-         // LOG << "STATE_CURED = " << (tMsgs[i].Data[4] == STATE_CURED) << std::endl;
-         // LOG << "Range = " << (tMsgs[i].Range < m_sApocalypseParams.CuringDistance) << std::endl;
-         if (tMsgs[i].Data[4] == STATE_CURED && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime == m_sApocalypseParams.CuringTime - 1)
+         if (tMsgs[i].Data[4] == STATE_CURED && 
+            tMsgs[i].Range < m_sApocalypseParams.CuringDistance && 
+            CurrentCuringTime == m_sApocalypseParams.CuringTime - 1)
          {  
             CurrentCuringTime = 0;
             return true;
@@ -635,11 +651,13 @@ void CEyeBotBeing::HealthyBehavior()
       LOGERR << "Opps, got infected!" << std::endl;
       m_HState = STATE_INFECTED;
       InfectionTime = 0;
-      //InfectedBehavior();
    }
    else
    {
-      CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + m_sApocalypseParams.gamma1_healthy*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_healthy*MedicBusyFlockingVector();
+      CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + 
+                        m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + 
+                        m_sApocalypseParams.gamma_healthy*MedicFreeFlockingVector() + 
+                        m_sApocalypseParams.delta_healthy*MedicBusyFlockingVector();
       Flock(forces);
    }
 }
@@ -686,16 +704,6 @@ void CEyeBotBeing::Die()
                 -10.0f));
    this->Destroy();
 }
-/*
-CVector2 CEyeBotBeing::myNormalize(CVector2 x){
-   if (x.Length() == 0){
-      return CVector2(0,0);
-   }
-   else {
-      return x/x.Length();
-   }
-}
-*/
 
 /*
  * This statement notifies ARGoS of the existence of the controller.

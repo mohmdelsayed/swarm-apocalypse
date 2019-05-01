@@ -32,12 +32,12 @@
       <params>
         <apocalypse alpha_healthy = "0"
                   beta_healthy = "0"
-                  gamma1_healthy = "0"
-                  gamma2_healthy = "0"
+                  gamma_healthy = "0"
+                  delta_healthy = "0"
                   alpha_infected = "0"
                   beta_infected = "0"
-                  gamma1_infected = "0"
-                  gamma2_infected = "0"
+                  gamma_infected = "0"
+                  delta_infected = "0"
                   InfectionPercentage="0"
                   InfectionStart="0"
                   InfectionTerminal="20000"
@@ -46,9 +46,9 @@
                   CuringTime = "150" />
 
         <flocking target_distance="250"
-                  gain="0.9"
+                  AttractionFactor="0.9"
                   exponent="2"
-                  max_interaction="0.35" />
+                  GoalGain="0.35" />
       </params>
     </eyebot_being_controller>
 
@@ -70,15 +70,15 @@
         <apocalypse
                   alpha_medic = "0"
                   beta_medic = "0"
-                  gamma1_medic = "1"
-                  gamma2_medic = "0"
+                  gamma_medic = "1"
+                  delta_medic = "0"
                   CuringDistance = "0"
                   CuringTime = "0" />
 
         <flocking target_distance="250"
-                  gain="0.9"
+                  AttractionFactor="0.9"
                   exponent="2"
-                  max_interaction="0.3" /> 
+                  GoalGain="0.3" /> 
 
       </params>
     </eyebot_medic_controller>
