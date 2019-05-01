@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/id_loop_functions_automoc.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o"
-  "/home/mohamed/swarm-apocalypse/loop_functions/id_loop_functions_eyebot/id_qtuser_functions.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o"
+  "/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/id_loop_functions_automoc.cpp" "/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o"
+  "/home/amer/argos3/swarm-apocalypse/loop_functions/id_loop_functions_eyebot/id_qtuser_functions.cpp" "/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -13,7 +13,6 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_TARGET_DEFINITIONS_CXX
   "QT_CORE_LIB"
   "QT_GUI_LIB"
-  "QT_NO_DEBUG"
   "QT_WIDGETS_LIB"
   )
 
@@ -27,6 +26,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/x86_64-linux-gnu/qt5/QtCore"
   "/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"
   "../"
+  "/usr/local/include"
   "/usr/include/lua5.2"
   )
 
