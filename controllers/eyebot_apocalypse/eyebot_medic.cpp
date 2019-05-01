@@ -187,10 +187,12 @@ void CEyeBotMedic::MainBehavior()
    if (m_MState == STATE_BUSY)
    {
       CuringBehavior();
-   }
-   if (m_MState == STATE_FREE)
+   } else if (m_MState == STATE_FREE)
    {
       AdvertisingBehavior();
+   }
+   else {
+      LOG << "Unknown State" << std::endl;
    }
 }
 
@@ -482,20 +484,22 @@ void CEyeBotMedic::CuringBehavior()
 
    m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
-
-   if (TotalCuringTime != m_sApocalypseParams.CuringTime)
+   LOG << "Medic Curing Time is " << TotalCuringTime << std::endl;
+   if (TotalCuringTime != m_sApocalypseParams.CuringTime - 3)
    {
       m_pcRABAct->SetData(3, STATE_CURING);
-      LOGERR << "You are being cured" << std::endl;
+      LOG << "You are being cured" << std::endl;
       TotalCuringTime = TotalCuringTime + 1;
+      m_pcRABAct->SetData(4, 0);
    }
    else
    {
       LOG << "You are cured" << std::endl;
       m_MState = STATE_FREE;
       m_pcRABAct->SetData(4, STATE_CURED);
-      m_pcRABAct->SetData(2, STATE_FREE);
+      //m_pcRABAct->SetData(2, STATE_FREE);
       StopToCure = true;
+      TotalCuringTime = 0;
    }
 }
 
@@ -515,6 +519,7 @@ void CEyeBotMedic::AdvertisingBehavior()
       CVector2 forces = m_sApocalypseParams.alpha_medic*HealthyFlockingVector() + m_sApocalypseParams.beta_medic*InfectedFlockingVector() + m_sApocalypseParams.gamma1_medic*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_medic*MedicBusyFlockingVector();
       Flock(forces);
    }
+   StopToCure = false;
 }
 
 /****************************************/

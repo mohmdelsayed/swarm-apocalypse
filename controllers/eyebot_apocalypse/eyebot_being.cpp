@@ -212,12 +212,15 @@ void CEyeBotBeing::MainBehavior()
    {
       HealthyBehavior();
    }
-   if (m_HState == STATE_INFECTED)
+   else if (m_HState == STATE_INFECTED)
    {
       InfectedBehavior();
    }
-   if (m_HState == STATE_DEAD){
+   else if (m_HState == STATE_DEAD){
       Die();
+   }
+   else {
+      LOGERR << "Unknown Behavior" << std::endl;
    }
 }
 /****************************************/
@@ -506,56 +509,60 @@ CVector2 CEyeBotBeing::MedicBusyFlockingVector()
 
 void CEyeBotBeing::InfectedBehavior()
 {
-   if(SeachForCure()){
-      CuringSignal = true;
-   }
-
    if(SearchForMedicSignal()){
       MedicSignal = true;
+   }
+
+   else if(SeachForCure()){
+      CuringSignal = true;
+   }
+   else {
+      LOG << "Didn't receive a medic signal or cure signal" << std::endl;
    }
 
    if (MedicSignal)
    {  
       LOG << "I am cured! Thank you!" << std::endl;
       m_HState = STATE_HEALTHY;
-      // m_pcRABAct->SetData(1, STATE_HEALTHY); == > (TODO): if published STATE_HEALTHY agents can infect you!
+      m_pcRABAct->SetData(1, STATE_HEALTHY); //== > (TODO): if published STATE_HEALTHY agents can infect you!
    }
 
-   if (m_HState == STATE_INFECTED && CuringSignal)
+   else if (CuringSignal && !MedicSignal)
    {
-      //LOG << "I am being cured!" << std::endl;
-      m_HState = STATE_INFECTED;
+      LOG << "I am being cured!" << std::endl;
       m_pcRABAct->SetData(1, STATE_INFECTED);
    }
 
 
-
-   if (!MedicSignal && !CuringSignal && InfectionTime < m_sApocalypseParams.InfectionStart && m_HState == STATE_INFECTED)
-   {  //CurrentCuringTime = 0;
+   else if (!MedicSignal && !CuringSignal && InfectionTime < m_sApocalypseParams.InfectionStart/* && m_HState == STATE_INFECTED*/)
+   {  
       LOGERR << "I think I am Healthy but I am not!" << std::endl;
-      m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
       CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + m_sApocalypseParams.gamma1_healthy*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_healthy*MedicBusyFlockingVector();
       Flock(forces);
       InfectionTime += 1;
    }
 
-   if (!CuringSignal && InfectionTime >= m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal && m_HState == STATE_INFECTED)
-   {  //CurrentCuringTime = 0;
+   else if (!MedicSignal && !CuringSignal && InfectionTime >= m_sApocalypseParams.InfectionStart && InfectionTime < m_sApocalypseParams.InfectionTerminal/* && m_HState == STATE_INFECTED*/)
+   {  
       LOGERR << "I am Infected!" << std::endl;
-      m_HState = STATE_INFECTED;
       m_pcRABAct->SetData(1, STATE_INFECTED);
       CVector2 forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + m_sApocalypseParams.beta_infected*InfectedFlockingVector() + m_sApocalypseParams.gamma1_infected*MedicFreeFlockingVector() + m_sApocalypseParams.gamma2_infected*MedicBusyFlockingVector();
       Flock(forces);
       InfectionTime += 1;
    }
 
-   if (InfectionTime >= m_sApocalypseParams.InfectionTerminal)
+   else if (InfectionTime >= m_sApocalypseParams.InfectionTerminal)
    {
       m_HState = STATE_DEAD;
       Die();
       m_pcRABAct->SetData(1, STATE_DEAD);
    }
+   else {
+      LOGERR << "Unknown Behavior" << std::endl;
+   }
+   MedicSignal = false;
+   CuringSignal = false;
 }
 
 /****************************************/
@@ -574,9 +581,9 @@ bool CEyeBotBeing::SeachForCure(){
          /*
           * We consider only the neighbors in state flock
           */
-         //LOG << "Curing Time is " << CurrentCuringTime << std::endl;
-         if (tMsgs[i].Data[3] == STATE_CURING && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime < m_sApocalypseParams.CuringTime)
+         if (tMsgs[i].Data[3] == STATE_CURING && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime < m_sApocalypseParams.CuringTime - 1)
          {
+            LOG << "Infected Curing Time is " << CurrentCuringTime << std::endl;
             CurrentCuringTime++;
             return true;
          }
@@ -599,8 +606,11 @@ bool CEyeBotBeing::SearchForMedicSignal()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[4] == STATE_CURED && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime == m_sApocalypseParams.CuringTime)
+         // LOG << "STATE_CURED = " << (tMsgs[i].Data[4] == STATE_CURED) << std::endl;
+         // LOG << "Range = " << (tMsgs[i].Range < m_sApocalypseParams.CuringDistance) << std::endl;
+         if (tMsgs[i].Data[4] == STATE_CURED && tMsgs[i].Range < m_sApocalypseParams.CuringDistance && CurrentCuringTime == m_sApocalypseParams.CuringTime - 1)
          {  
+            CurrentCuringTime = 0;
             return true;
          }
       }
@@ -615,6 +625,7 @@ void CEyeBotBeing::HealthyBehavior()
 {
    CuringSignal = false;
    MedicSignal = false;
+   CurrentCuringTime = 0;
    LOGERR << "I am Healthy!" << std::endl;
    m_HState = STATE_HEALTHY;
    m_pcRABAct->SetData(1, STATE_HEALTHY);
@@ -624,7 +635,7 @@ void CEyeBotBeing::HealthyBehavior()
       LOGERR << "Opps, got infected!" << std::endl;
       m_HState = STATE_INFECTED;
       InfectionTime = 0;
-      InfectedBehavior();
+      //InfectedBehavior();
    }
    else
    {
