@@ -1,6 +1,6 @@
 #ifndef ID_QTUSER_FUNCTIONS_H
 #define ID_QTUSER_FUNCTIONS_H
-
+#include <argos3/core/simulator/loop_functions.h>
 #include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_user_functions.h>
 #include <argos3/plugins/robots/eye-bot/simulator/eyebot_entity.h>
 
@@ -15,7 +15,6 @@ public:
    virtual ~CIDQTUserFunctions() {}
 
    void Draw(CEyeBotEntity& c_entity);
-   
 };
 
 #endif

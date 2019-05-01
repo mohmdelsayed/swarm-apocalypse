@@ -3,6 +3,7 @@
 
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_loop_functions_automoc.cpp.o: loop_functions/id_loop_functions_eyebot/id_loop_functions_automoc.cpp
 
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: ../controllers/eyebot_apocalypse/eyebot_being.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: ../loop_functions/id_loop_functions_eyebot/id_qtuser_functions.cpp
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: ../loop_functions/id_loop_functions_eyebot/id_qtuser_functions.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/include/lua5.2/lauxlib.h
@@ -138,6 +139,7 @@ loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtus
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/entity/controllable_entity.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/entity/embodied_entity.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/entity/entity.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/loop_functions.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/medium/medium.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/physics_engine/physics_engine.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/simulator/physics_engine/physics_model.h
@@ -156,6 +158,7 @@ loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtus
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/tinystr.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/tinyxml.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/datatypes/any.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/datatypes/byte_array.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/datatypes/color.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/datatypes/datatypes.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/datatypes/set.h
@@ -177,7 +180,13 @@ loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtus
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/plugins/factory_impl.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/plugins/vtable.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/core/utility/string_utilities.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/eye-bot/control_interface/ci_eyebot_light_sensor.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/eye-bot/simulator/eyebot_entity.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_quadrotor_position_actuator.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h
+loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_camera.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_main_window.h
 loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/id_qtuser_functions.cpp.o: /usr/local/include/argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_user_functions.h
