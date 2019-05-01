@@ -313,7 +313,7 @@ CVector2 CEyeBotBeing::InfectedFlockingVector()
          /*
           * We consider only the neighbors in state flock
           */
-         if (tMsgs[i].Data[0] == STATE_FLOCK && tMsgs[i].Data[1] == STATE_INFECTED)
+         if (tMsgs[i].Data[0] == STATE_FLOCK && (tMsgs[i].Data[1] == STATE_INFECTED || tMsgs[i].Data[1] == STATE_BEING_CURED))
          {
             /*
              * Take the message sender range and horizontal bearing
@@ -530,7 +530,7 @@ void CEyeBotBeing::InfectedBehavior()
    else if (CuringSignal && !MedicSignal)
    {
       LOG << "I am being cured!" << std::endl;
-      m_pcRABAct->SetData(1, STATE_INFECTED);
+      m_pcRABAct->SetData(1, STATE_BEING_CURED);
    }
 
 
