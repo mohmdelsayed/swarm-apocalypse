@@ -12,8 +12,8 @@
  *    experiments/eyebot_flocking.argos
  */
 
-#ifndef EYEBOT_FLOCKING_H
-#define EYEBOT_FLOCKING_H
+#ifndef EYEBOT_MEDIC_H
+#define EYEBOT_MEDIC_H
 
 /*
  * Include some necessary headers.
@@ -85,6 +85,7 @@ public:
       Real gamma_medic;
       /* Weight of interaction between medic and busy medic agents */
       Real delta_medic;
+
       void Init(TConfigurationNode &t_node);
    };
 
@@ -124,6 +125,9 @@ public:
     */
    virtual void Destroy() {}
 
+   inline bool IsHealthy() const {
+      return m_MState == STATE_FREE;
+   }
 private:
    /*
     * Takes off the robot.

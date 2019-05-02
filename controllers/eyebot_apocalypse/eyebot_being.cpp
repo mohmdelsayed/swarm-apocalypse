@@ -50,6 +50,7 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "delta_infected", delta_infected);
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
       GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
+      GetNodeAttribute(t_node, "visualize", visualize);
    }
    catch (CARGoSException &ex)
    {

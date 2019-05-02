@@ -12,8 +12,8 @@
  *    experiments/eyebot_flocking.argos
  */
 
-#ifndef EYEBOT_FLOCKING_H
-#define EYEBOT_FLOCKING_H
+#ifndef EYEBOT_BEING_H
+#define EYEBOT_BEING_H
 
 /*
  * Include some necessary headers.
@@ -104,6 +104,7 @@ public:
       /* Weight of interaction between infected and busy medic agents */
       Real delta_infected;
 
+      Real visualize;
       void Init(TConfigurationNode &t_node);
    };
 
@@ -145,12 +146,53 @@ public:
 
    }
 
+   inline bool IsHealthy() const {
+      return m_HState == STATE_HEALTHY;
+   }
+
+
+   inline Real GetCuringTime() const {
+      return CurrentCuringTime;
+   }
+
+   inline bool Visualize() const {
+      if (m_sApocalypseParams.visualize == 1){
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   
+   /*
+    * Returns the food data
+    */
+   // inline Real& GetHealth() {
+   //    Real value = 0.0f;
+   //    if(m_HState == STATE_HEALTHY){
+   //       value = 1.0f;
+   //       return value;
+   //    } else if(m_HState == STATE_INFECTED){
+   //       value = 2.0f;
+   //       return value;
+   //    }
+   //    else if(m_HState == STATE_BEING_CURED){
+   //       value = 3.0f;
+   //       return value;
+   //    }
+   //    else if(m_HState == STATE_DEAD){
+   //       value = 4.0f;
+   //       return value;
+   //    }
+   // }
 
 private:
    /*
     * Takes off the robot.
     */
    void TakeOff();
+   void UpdateState();
+
    /*
     * Calculates overall interaction between agents and moves the agent towards the resultant
     */
