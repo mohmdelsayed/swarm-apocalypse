@@ -56,6 +56,7 @@ for i in range(number_of_experiments):
     CuringDistance = 500        # 500 is optimum
     CuringTime = 33             # 33  is optimum
     visualize = 0               #  1  to show counter 
+    log = 0               #  1  to log messages 
     #<flocking></>
     target_distance = 250       #  250  is optimum  
     AttractionFactor= 0.9       #  0.9  is optimum  
@@ -77,6 +78,7 @@ for i in range(number_of_experiments):
                                          "InfectionDistance" : str(InfectionDistance),
                                          "CuringDistance" : str(CuringDistance),
                                          "CuringTime" : str(CuringTime),
+                                         "log" : str(log),
                                          "visualize" : str(visualize) }
 
     flocking_simulation_parameters ={    "target_distance" : str(target_distance),
