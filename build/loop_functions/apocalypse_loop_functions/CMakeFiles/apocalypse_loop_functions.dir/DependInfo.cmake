@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/amer/argos3/swarm-apocalypse/loop_functions/apocalypse_loop_functions/apocalypse_loop_functions.cpp" "/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_loop_functions.cpp.o"
-  "/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/apocalypse_loop_functions_automoc.cpp" "/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_loop_functions_automoc.cpp.o"
-  "/home/amer/argos3/swarm-apocalypse/loop_functions/apocalypse_loop_functions/apocalypse_qt_user_functions.cpp" "/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_qt_user_functions.cpp.o"
+  "/home/mohamed/swarm-apocalypse/loop_functions/apocalypse_loop_functions/apocalypse_loop_functions.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_loop_functions.cpp.o"
+  "/home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/apocalypse_loop_functions_automoc.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_loop_functions_automoc.cpp.o"
+  "/home/mohamed/swarm-apocalypse/loop_functions/apocalypse_loop_functions/apocalypse_qt_user_functions.cpp" "/home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/apocalypse_qt_user_functions.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -27,7 +27,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/x86_64-linux-gnu/qt5/QtCore"
   "/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"
   "../"
-  "/usr/local/include"
   "/usr/include/lua5.2"
   )
 

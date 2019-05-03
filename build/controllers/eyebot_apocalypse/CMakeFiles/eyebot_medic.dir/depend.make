@@ -3,44 +3,6 @@
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: ../controllers/eyebot_apocalypse/eyebot_medic.cpp
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: ../controllers/eyebot_apocalypse/eyebot_medic.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/include/lua5.2/lauxlib.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/include/lua5.2/lua.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/include/lua5.2/luaconf.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/include/lua5.2/lualib.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/config.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/control_interface/ci_actuator.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/control_interface/ci_controller.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/control_interface/ci_sensor.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/argos_configuration.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/argos_exception.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/base_configurable_resource.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/ticpp.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/ticpprc.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/tinystr.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/configuration/tinyxml/tinyxml.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/datatypes/byte_array.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/datatypes/color.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/datatypes/datatypes.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/logging/argos_colored_text.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/logging/argos_log.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/angles.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/general.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/matrix/matrix.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/matrix/rotationmatrix3.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/matrix/squarematrix.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/quaternion.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/range.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/vector2.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/math/vector3.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/plugins/factory.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/plugins/factory_impl.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/core/utility/string_utilities.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/eye-bot/control_interface/ci_eyebot_light_sensor.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_quadrotor_position_actuator.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h
-controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic.cpp.o: /usr/local/include/argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h
 
 controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic.dir/eyebot_medic_automoc.cpp.o: controllers/eyebot_apocalypse/eyebot_medic_automoc.cpp
 

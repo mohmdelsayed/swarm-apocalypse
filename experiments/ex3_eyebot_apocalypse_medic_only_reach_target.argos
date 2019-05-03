@@ -51,7 +51,7 @@
                   InfectionDistance="200"
                   CuringDistance = "500"
                   CuringTime = "150" 
-                  visualize = "0"/> 
+                  visualize = "0" log = "0"/> 
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
@@ -81,7 +81,8 @@
                   gamma_medic = "1"
                   delta_medic = "0"
                   CuringDistance = "0"
-                  CuringTime = "0" />
+                  CuringTime = "0"
+                  visualize = "0" log = "0"/>
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
@@ -125,19 +126,6 @@
       </entity>
     </distribute>
 
-        <!-- Distribute 50 entities in a 4x4 grid on the ground, all facing along the X axis -->
-    <!-- <distribute>
-      <position method="grid"
-                center="-25,-25,0"
-                distances="1,1,0"
-                layout="8,8,1" />
-      <orientation method="constant" values="0,0,0" />
-      <entity quantity="64" max_trials="1000">
-        <eye-bot id="eb_being" rab_range="10">
-          <controller config="being" />
-        </eye-bot>
-      </entity>
-    </distribute> -->
   </arena>
 
   <!-- ******************* -->
@@ -179,8 +167,5 @@
     <user_functions label="apocalypse_qt_user_functions" />
 
     </qt-opengl>
-
-      <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"
-                      label="id_qtuser_functions" /> -->
   </visualization>
 </argos-configuration>

@@ -51,6 +51,7 @@ void CEyeBotBeing::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "CuringTime", CuringTime);
       GetNodeAttribute(t_node, "CuringDistance", CuringDistance);
       GetNodeAttribute(t_node, "visualize", visualize);
+      GetNodeAttribute(t_node, "log", myLogger);
    }
    catch (CARGoSException &ex)
    {
@@ -524,26 +525,30 @@ void CEyeBotBeing::InfectedBehavior()
       CuringSignal = true;
    }
    else {
-      LOG << "Didn't receive a medic signal or cure signal" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOG << "Didn't receive a medic signal or cure signal" << std::endl;
    }
 
    if (MedicSignal)
    {  
-      LOG << "I am cured! Thank you!" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOG << "I am cured! Thank you!" << std::endl;
       m_HState = STATE_HEALTHY;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
    }
 
    else if (CuringSignal && !MedicSignal)
    {
-      LOG << "I am being cured!" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOG << "I am being cured!" << std::endl;
       m_pcRABAct->SetData(1, STATE_BEING_CURED);
    }
 
 
    else if (!MedicSignal && !CuringSignal && InfectionTime < m_sApocalypseParams.InfectionStart)
    {  
-      LOGERR << "I think I am Healthy but I am not!" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOGERR << "I think I am Healthy but I am not!" << std::endl;
       m_pcRABAct->SetData(1, STATE_HEALTHY);
       CVector2 forces = m_sApocalypseParams.alpha_healthy*HealthyFlockingVector() + 
                         m_sApocalypseParams.beta_healthy*InfectedFlockingVector() + 
@@ -557,7 +562,8 @@ void CEyeBotBeing::InfectedBehavior()
             InfectionTime >= m_sApocalypseParams.InfectionStart && 
             InfectionTime < m_sApocalypseParams.InfectionTerminal)
    {  
-      LOGERR << "I am Infected!" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOGERR << "I am Infected!" << std::endl;
       m_pcRABAct->SetData(1, STATE_INFECTED);
       CVector2 forces = m_sApocalypseParams.alpha_infected*HealthyFlockingVector() + 
                         m_sApocalypseParams.beta_infected*InfectedFlockingVector() + 
@@ -574,7 +580,8 @@ void CEyeBotBeing::InfectedBehavior()
       m_pcRABAct->SetData(1, STATE_DEAD);
    }
    else {
-      LOGERR << "[BUG] Unknown Behavior" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOGERR << "[BUG] Unknown Behavior" << std::endl;
    }
    MedicSignal = false;
    CuringSignal = false;
@@ -600,7 +607,8 @@ bool CEyeBotBeing::SeachForCure(){
             tMsgs[i].Range < m_sApocalypseParams.CuringDistance && 
             CurrentCuringTime < m_sApocalypseParams.CuringTime - 1)
          {
-            LOG << "Infected Curing Time is " << CurrentCuringTime << std::endl;
+            if(m_sApocalypseParams.myLogger == 1)
+               LOG << "Infected Curing Time is " << CurrentCuringTime << std::endl;
             CurrentCuringTime++;
             return true;
          }
@@ -643,12 +651,14 @@ void CEyeBotBeing::HealthyBehavior()
    CuringSignal = false;
    MedicSignal = false;
    CurrentCuringTime = 0;
-   LOGERR << "I am Healthy!" << std::endl;
+   if(m_sApocalypseParams.myLogger == 1)
+      LOGERR << "I am Healthy!" << std::endl;
    m_HState = STATE_HEALTHY;
    m_pcRABAct->SetData(1, STATE_HEALTHY);
 
    if (SearchForInfected())
    {
+   if(m_sApocalypseParams.myLogger == 1)
       LOGERR << "Opps, got infected!" << std::endl;
       m_HState = STATE_INFECTED;
       InfectionTime = 0;
@@ -697,7 +707,8 @@ bool CEyeBotBeing::SearchForInfected()
 
 void CEyeBotBeing::Die()
 {
-   LOGERR << "I am Dead!" << std::endl;
+   if(m_sApocalypseParams.myLogger == 1)
+      LOGERR << "I am Dead!" << std::endl;
 
    m_pcPosAct->SetRelativePosition(
        CVector3(0.0f,

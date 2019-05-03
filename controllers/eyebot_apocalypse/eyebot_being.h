@@ -105,6 +105,7 @@ public:
       Real delta_infected;
 
       Real visualize;
+      Real myLogger;
       void Init(TConfigurationNode &t_node);
    };
 
@@ -163,7 +164,11 @@ public:
       }
    }
 
-   
+
+   inline bool IsDead() const {
+      return m_HState == STATE_DEAD;
+   }
+
    /*
     * Returns the food data
     */

@@ -24,7 +24,8 @@ public:
 private:
 
    CRandom::CRNG* m_pcRNG;
-
+   Real noDeaths;
+   Real timeCounter;
 };
 
 #endif

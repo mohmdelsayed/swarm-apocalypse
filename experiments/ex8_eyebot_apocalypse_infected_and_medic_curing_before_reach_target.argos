@@ -54,8 +54,8 @@
                   InfectionDistance="200"
                   
                   CuringDistance = "500"
-                  CuringTime = "33"
-                  visualize = "0"/>
+                  CuringTime = "30"
+                  visualize = "0" log = "0"/>
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
@@ -84,7 +84,8 @@
                   gamma_medic = "0.1"
                   delta_medic = "0.1"
                   CuringDistance = "500"
-                  CuringTime = "33" />
+                  CuringTime = "30"
+                  log = "0" />
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"

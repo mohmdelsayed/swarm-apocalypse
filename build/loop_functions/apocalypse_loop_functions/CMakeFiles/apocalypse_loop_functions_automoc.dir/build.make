@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/amer/argos3/swarm-apocalypse
+CMAKE_SOURCE_DIR = /home/mohamed/swarm-apocalypse
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/amer/argos3/swarm-apocalypse/build
+CMAKE_BINARY_DIR = /home/mohamed/swarm-apocalypse/build
 
 # Utility rule file for apocalypse_loop_functions_automoc.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/amer/argos3/swarm-apocalypse/build
 include loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/progress.make
 
 loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/amer/argos3/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target apocalypse_loop_functions"
-	cd /home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions && /usr/bin/cmake -E cmake_autogen /home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/ Debug
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/mohamed/swarm-apocalypse/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic moc for target apocalypse_loop_functions"
+	cd /home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions && /usr/bin/cmake -E cmake_autogen /home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/ ""
 
 apocalypse_loop_functions_automoc: loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc
 apocalypse_loop_functions_automoc: loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/build.make
@@ -68,10 +68,10 @@ loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_au
 .PHONY : loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/build
 
 loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/clean:
-	cd /home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions && $(CMAKE_COMMAND) -P CMakeFiles/apocalypse_loop_functions_automoc.dir/cmake_clean.cmake
+	cd /home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions && $(CMAKE_COMMAND) -P CMakeFiles/apocalypse_loop_functions_automoc.dir/cmake_clean.cmake
 .PHONY : loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/clean
 
 loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/depend:
-	cd /home/amer/argos3/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/amer/argos3/swarm-apocalypse /home/amer/argos3/swarm-apocalypse/loop_functions/apocalypse_loop_functions /home/amer/argos3/swarm-apocalypse/build /home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions /home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mohamed/swarm-apocalypse/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mohamed/swarm-apocalypse /home/mohamed/swarm-apocalypse/loop_functions/apocalypse_loop_functions /home/mohamed/swarm-apocalypse/build /home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions /home/mohamed/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/depend
 

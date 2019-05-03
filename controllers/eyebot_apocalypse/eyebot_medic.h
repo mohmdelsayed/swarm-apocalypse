@@ -85,7 +85,7 @@ public:
       Real gamma_medic;
       /* Weight of interaction between medic and busy medic agents */
       Real delta_medic;
-
+      Real myLogger;
       void Init(TConfigurationNode &t_node);
    };
 

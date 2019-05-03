@@ -42,6 +42,7 @@ void CEyeBotMedic::SApocalypseParams::Init(TConfigurationNode &t_node)
       GetNodeAttribute(t_node, "beta_medic", beta_medic);
       GetNodeAttribute(t_node, "gamma_medic", gamma_medic);
       GetNodeAttribute(t_node, "delta_medic", delta_medic);
+      GetNodeAttribute(t_node, "log", myLogger);
    }
    catch (CARGoSException &ex)
    {
@@ -175,6 +176,7 @@ void CEyeBotMedic::ControlStep()
       MainBehavior();
       break;
    default:
+   if(m_sApocalypseParams.myLogger == 1)
       LOGERR << "[BUG] Unknown robot state: " << m_eState << std::endl;
    }
 }
@@ -192,6 +194,7 @@ void CEyeBotMedic::MainBehavior()
       AdvertisingBehavior();
    }
    else {
+   if(m_sApocalypseParams.myLogger == 1)
       LOGERR << "Unknown State" << std::endl;
    }
 }
@@ -483,21 +486,25 @@ CVector2 CEyeBotMedic::MedicBusyFlockingVector()
 
 void CEyeBotMedic::CuringBehavior()
 {
-   LOGERR << "I am a busy Doctor!" << std::endl;
+   if(m_sApocalypseParams.myLogger == 1)
+      LOGERR << "I am a busy Doctor!" << std::endl;
 
    m_MState = STATE_BUSY;
    m_pcRABAct->SetData(2, STATE_BUSY);
-   LOG << "Medic Curing Time is " << TotalCuringTime << std::endl;
+   if(m_sApocalypseParams.myLogger == 1)
+      LOG << "Medic Curing Time is " << TotalCuringTime << std::endl;
    if (TotalCuringTime != m_sApocalypseParams.CuringTime - 3)
    {
       m_pcRABAct->SetData(3, STATE_CURING);
-      LOG << "You are being cured" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOG << "You are being cured" << std::endl;
       TotalCuringTime = TotalCuringTime + 1;
       m_pcRABAct->SetData(4, 0);
    }
    else
    {
-      LOG << "You are cured" << std::endl;
+      if(m_sApocalypseParams.myLogger == 1)
+         LOG << "You are cured" << std::endl;
       m_MState = STATE_FREE;
       m_pcRABAct->SetData(4, STATE_CURED);
       StopToCure = true;
@@ -511,7 +518,8 @@ void CEyeBotMedic::CuringBehavior()
 void CEyeBotMedic::AdvertisingBehavior()
 {
    m_MState = STATE_FREE;
-   LOGERR << "I am a free Doctor!" << std::endl;
+   if(m_sApocalypseParams.myLogger == 1)
+      LOGERR << "I am a free Doctor!" << std::endl;
    m_pcRABAct->SetData(2, STATE_FREE);
 
    if (SearchForInfected() && !StopToCure)

@@ -15,14 +15,14 @@ CApocalypseLoopFunctions::CApocalypseLoopFunctions() :
 /****************************************/
 
 void CApocalypseLoopFunctions::Init(TConfigurationNode& t_node) {
-
+   timeCounter = 0;
 }
 
 /****************************************/
 /****************************************/
 
 void CApocalypseLoopFunctions::Reset() {
-
+   noDeaths = 0;
 }
 
 /****************************************/
@@ -41,6 +41,24 @@ CColor CApocalypseLoopFunctions::GetFloorColor(const CVector2& c_position_on_pla
 /****************************************/
 
 void CApocalypseLoopFunctions::PreStep() {
+   CSpace::TMapPerType& m_cEyeBots = GetSpace().GetEntitiesByType("eye-bot");
+   noDeaths = 0;
+   void* cController;
+   for(CSpace::TMapPerType::iterator it = m_cEyeBots.begin();
+       it != m_cEyeBots.end();
+       ++it) {
+
+      /* Get handle to foot-bot entity and controller */
+      CEyeBotEntity& cEyeBot = *any_cast<CEyeBotEntity*>(it->second);
+
+      std::string entity_name = cEyeBot.GetId().substr(0,1);
+      if (entity_name.compare("M")){
+         CEyeBotBeing& cController = dynamic_cast<CEyeBotBeing&>(cEyeBot.GetControllableEntity().GetController());
+
+         if(cController.IsDead()) noDeaths++;
+      }
+   }
+   LOG << "[t=" << timeCounter++ << "]" << " Number of Deaths: " << noDeaths << std::endl;
 }
 
 /****************************************/

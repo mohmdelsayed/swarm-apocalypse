@@ -55,7 +55,7 @@
                   gamma_medic = "0.1"
                   delta_medic = "0.1"
                   CuringDistance = "500"
-                  CuringTime = "33" />
+                  CuringTime = "30" />
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
