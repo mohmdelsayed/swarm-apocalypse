@@ -163,30 +163,30 @@ eyebot_being_automoc/fast:
 .PHONY : eyebot_being_automoc/fast
 
 #=============================================================================
-# Target rules for targets named id_loop_functions
+# Target rules for targets named apocalypse_loop_functions
 
 # Build rule for target.
-id_loop_functions: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 id_loop_functions
-.PHONY : id_loop_functions
+apocalypse_loop_functions: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 apocalypse_loop_functions
+.PHONY : apocalypse_loop_functions
 
 # fast build rule for target.
-id_loop_functions/fast:
-	$(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/build
-.PHONY : id_loop_functions/fast
+apocalypse_loop_functions/fast:
+	$(MAKE) -f loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/build.make loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/build
+.PHONY : apocalypse_loop_functions/fast
 
 #=============================================================================
-# Target rules for targets named id_loop_functions_automoc
+# Target rules for targets named apocalypse_loop_functions_automoc
 
 # Build rule for target.
-id_loop_functions_automoc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 id_loop_functions_automoc
-.PHONY : id_loop_functions_automoc
+apocalypse_loop_functions_automoc: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 apocalypse_loop_functions_automoc
+.PHONY : apocalypse_loop_functions_automoc
 
 # fast build rule for target.
-id_loop_functions_automoc/fast:
-	$(MAKE) -f loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build.make loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/build
-.PHONY : id_loop_functions_automoc/fast
+apocalypse_loop_functions_automoc/fast:
+	$(MAKE) -f loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/build.make loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/build
+.PHONY : apocalypse_loop_functions_automoc/fast
 
 # Help Target
 help:
@@ -200,8 +200,8 @@ help:
 	@echo "... eyebot_being"
 	@echo "... eyebot_medic_automoc"
 	@echo "... eyebot_being_automoc"
-	@echo "... id_loop_functions"
-	@echo "... id_loop_functions_automoc"
+	@echo "... apocalypse_loop_functions"
+	@echo "... apocalypse_loop_functions_automoc"
 .PHONY : help
 
 

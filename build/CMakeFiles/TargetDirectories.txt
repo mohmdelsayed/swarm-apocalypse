@@ -10,9 +10,9 @@
 /home/amer/argos3/swarm-apocalypse/build/controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir
 /home/amer/argos3/swarm-apocalypse/build/loop_functions/CMakeFiles/edit_cache.dir
 /home/amer/argos3/swarm-apocalypse/build/loop_functions/CMakeFiles/rebuild_cache.dir
-/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/edit_cache.dir
-/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/rebuild_cache.dir
-/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir
-/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir
+/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/edit_cache.dir
+/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/rebuild_cache.dir
+/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir
+/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir
 /home/amer/argos3/swarm-apocalypse/build/embedding/CMakeFiles/edit_cache.dir
 /home/amer/argos3/swarm-apocalypse/build/embedding/CMakeFiles/rebuild_cache.dir

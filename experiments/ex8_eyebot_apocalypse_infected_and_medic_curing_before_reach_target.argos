@@ -44,17 +44,18 @@
                   delta_healthy = "0"
                   
                   alpha_infected = "0"
-                  beta_infected = "0.5"
-                  gamma_infected = "0.5"
-                  delta_infected = "0.5"
+                  beta_infected = "0.1"
+                  gamma_infected = "0.1"
+                  delta_infected = "0.1"
                   
                   InfectionPercentage="1"
-                  InfectionStart="0"
+                  InfectionStart="50"
                   InfectionTerminal="600"
                   InfectionDistance="200"
                   
                   CuringDistance = "500"
-                  CuringTime = "33"/>
+                  CuringTime = "33"
+                  visualize = "0"/>
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
@@ -94,6 +95,13 @@
     </eyebot_medic_controller>
 
   </controllers>
+
+  <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+  <loop_functions library="build/loop_functions/apocalypse_loop_functions/libapocalypse_loop_functions"
+                  label="apocalypse_loop_functions">
+  </loop_functions>
 
   <!-- *********************** -->
   <!-- * Arena configuration * -->
@@ -161,7 +169,7 @@
         <placement idx="1" position="-0.563171,1.6644,4.6916" look_at="-1.1973,0.899792,4.57646" up="-0.0735043,-0.0886276,0.993349" lens_focal_length="20" />
         <placement idx="2" position="-22.6736,2.34769,4.06846" look_at="-21.8464,1.79386,3.97321" up="0.07915,-0.0529954,0.995453" lens_focal_length="20" />
         <placement idx="3" position="24.5976,33.9721,6.98847" look_at="24.1787,33.0644,6.96307" up="-0.0106417,-0.0230582,0.999677" lens_focal_length="20" />
-        <placement idx="4" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+        <placement idx="4" position="-26.6051,0.66682,8.24072" look_at="-25.9166,0.0254536,7.90214" up="0.247734,-0.230778,0.940941" lens_focal_length="20" />        <placement idx="5" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
         <placement idx="5" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
         <placement idx="6" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
         <placement idx="7" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
@@ -171,8 +179,8 @@
         <placement idx="11" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
     </camera>
 
-      <user_functions library="build/loop_functions/id_loop_functions_eyebot/libid_loop_functions"
-                      label="id_qtuser_functions" />
+    <user_functions label="apocalypse_qt_user_functions" />
+
     </qt-opengl>
 
       <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"

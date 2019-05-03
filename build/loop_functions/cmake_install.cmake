@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/amer/argos3/swarm-apocalypse/build/loop_functions/id_loop_functions_eyebot/cmake_install.cmake")
+  include("/home/amer/argos3/swarm-apocalypse/build/loop_functions/apocalypse_loop_functions/cmake_install.cmake")
 
 endif()
 

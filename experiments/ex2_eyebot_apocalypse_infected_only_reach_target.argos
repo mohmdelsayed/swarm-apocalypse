@@ -55,7 +55,8 @@
                   InfectionDistance="0"
                   
                   CuringDistance = "0"
-                  CuringTime = "0"/>
+                  CuringTime = "0"
+                  visualize = "0"/>
 
         <flocking target_distance="250"
                   AttractionFactor="0.9"
@@ -96,6 +97,12 @@
     </eyebot_medic_controller>
 
   </controllers>
+  <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+  <loop_functions library="build/loop_functions/apocalypse_loop_functions/libapocalypse_loop_functions"
+                  label="apocalypse_loop_functions">
+  </loop_functions>
 
   <!-- *********************** -->
   <!-- * Arena configuration * -->
@@ -173,8 +180,8 @@
         <placement idx="11" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
     </camera>
 
-      <user_functions library="build/loop_functions/id_loop_functions_eyebot/libid_loop_functions"
-                      label="id_qtuser_functions" />
+    <user_functions label="apocalypse_qt_user_functions" />
+
     </qt-opengl>
 
       <!-- <user_functions library="build/loop_functions/id_loop_functions/libid_loop_functions"

@@ -17,7 +17,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../controllers/eyebot_apocalypse/CMakeLists.txt"
   "../embedding/CMakeLists.txt"
   "../loop_functions/CMakeLists.txt"
-  "../loop_functions/id_loop_functions_eyebot/CMakeLists.txt"
+  "../loop_functions/apocalypse_loop_functions/CMakeLists.txt"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5Config.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake"
@@ -137,7 +137,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "controllers/CMakeFiles/CMakeDirectoryInformation.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/CMakeDirectoryInformation.cmake"
   "loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "loop_functions/id_loop_functions_eyebot/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "loop_functions/apocalypse_loop_functions/CMakeFiles/CMakeDirectoryInformation.cmake"
   "embedding/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -147,6 +147,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_being.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_medic_automoc.dir/DependInfo.cmake"
   "controllers/eyebot_apocalypse/CMakeFiles/eyebot_being_automoc.dir/DependInfo.cmake"
-  "loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions.dir/DependInfo.cmake"
-  "loop_functions/id_loop_functions_eyebot/CMakeFiles/id_loop_functions_automoc.dir/DependInfo.cmake"
+  "loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions.dir/DependInfo.cmake"
+  "loop_functions/apocalypse_loop_functions/CMakeFiles/apocalypse_loop_functions_automoc.dir/DependInfo.cmake"
   )

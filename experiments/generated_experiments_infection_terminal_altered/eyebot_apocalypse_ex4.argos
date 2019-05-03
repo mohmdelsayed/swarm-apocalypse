@@ -1,0 +1,133 @@
+<argos-configuration>
+
+  
+  
+  
+  <framework>
+    <system threads="0" />
+    
+    <experiment length="0" random_seed="11111" ticks_per_second="10" />
+    <profiling file="simulation_results.txt" format="table" truncate_file="true" />
+  </framework>
+  
+  
+  
+  
+  <controllers>
+    
+    <eyebot_being_controller id="being" library="build/controllers/eyebot_apocalypse/libeyebot_being.so">
+      <actuators>
+        <quadrotor_position implementation="default" />
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+      </actuators>
+      <sensors> 
+        <positioning implementation="default" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
+      </sensors>
+      <params>
+
+      <apocalypse CuringDistance="500" CuringTime="33" InfectionDistance="200" InfectionPercentage="0.2" InfectionStart="50" InfectionTerminal="400" alpha_healthy="1" alpha_infected="0.1" beta_healthy="0.1" beta_infected="0.1" delta_healthy="0.1" delta_infected="0.1" gamma_healthy="0.1" gamma_infected="1" visualize="0" /><flocking AttractionFactor="0.9" GoalGain="0.03" exponent="2" target_distance="250" /></params>
+    </eyebot_being_controller>
+
+
+    
+    <eyebot_medic_controller id="medic" library="build/controllers/eyebot_apocalypse/libeyebot_medic.so">
+      <actuators>
+        <quadrotor_position implementation="default" />
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+
+      </actuators>
+      <sensors>
+        <positioning implementation="default" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <eyebot_light implementation="rot_z_only" show_rays="false" />
+      </sensors>
+      <params>
+        <apocalypse CuringDistance="500" CuringTime="33" alpha_medic="1" beta_medic="0.1" delta_medic="0.1" gamma_medic="0.1" />
+
+        <flocking AttractionFactor="0.9" GoalGain="0.030" exponent="2" target_distance="250" /> 
+
+      </params>
+    </eyebot_medic_controller>
+
+  </controllers>
+
+  
+  
+  
+  <loop_functions label="apocalypse_loop_functions" library="build/loop_functions/apocalypse_loop_functions/libapocalypse_loop_functions">
+  </loop_functions>
+
+  
+  
+  
+  <arena center="0, 0, 2.5" size="60, 60, 5">
+    <light color="white" id="l" intensity="20" medium="light" orientation="0,0,0" position="20,20,3" />
+    <distribute>
+      <position max="0,0,0" method="uniform" min="-25,-25,0" />
+      <orientation mean="0,0,0" method="gaussian" std_dev="360,0,0" />
+      <entity max_trials="1000" quantity="50">
+        <eye-bot id="B" rab_range="10">
+          <controller config="being" />
+        </eye-bot>
+      </entity>
+    </distribute>
+
+    <distribute>
+      <position max="0,0,0" method="uniform" min="-25,-25,0" />
+      <orientation mean="0,0,0" method="gaussian" std_dev="360,0,0" />
+      <entity max_trials="1000" quantity="5">
+        <eye-bot id="M" rab_range="10">
+          <controller config="medic" />
+        </eye-bot>
+      </entity>
+    </distribute>
+
+        
+    
+  </arena>
+
+  
+  
+  
+  <physics_engines>
+    <pointmass3d id="pm3d" iterations="15" />
+  </physics_engines>
+
+  
+  
+  
+  <media>
+    <range_and_bearing id="rab" />
+    <led id="leds" />
+    <led id="light" />
+  </media>
+
+  
+  
+  
+  <visualization>
+    <qt-opengl>
+    <camera>
+        <placement idx="0" lens_focal_length="15" look_at="0.0140583,1.89717,43.4928" position="0.0141579,1.9474,44.4915" up="-0.00198035,-0.998736,0.0502295" />
+        <placement idx="1" lens_focal_length="20" look_at="-1.1973,0.899792,4.57646" position="-0.563171,1.6644,4.6916" up="-0.0735043,-0.0886276,0.993349" />
+        <placement idx="2" lens_focal_length="20" look_at="-21.8464,1.79386,3.97321" position="-22.6736,2.34769,4.06846" up="0.07915,-0.0529954,0.995453" />
+        <placement idx="3" lens_focal_length="20" look_at="24.1787,33.0644,6.96307" position="24.5976,33.9721,6.98847" up="-0.0106417,-0.0230582,0.999677" />
+        <placement idx="4" lens_focal_length="20" look_at="-25.9166,0.0254536,7.90214" position="-26.6051,0.66682,8.24072" up="0.247734,-0.230778,0.940941" />        <placement idx="5" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="6" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="7" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="8" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="9" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="10" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+        <placement idx="11" lens_focal_length="20" look_at="0,0,0" position="-2,0,2" up="0.707107,0,0.707107" />
+    </camera>
+  
+    <user_functions label="apocalypse_qt_user_functions" />
+    </qt-opengl>
+
+      
+  </visualization>
+</argos-configuration>
