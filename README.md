@@ -2,7 +2,7 @@
 
 This is a private repo for the work of the paper "Disease Spread Control in Flocking Swarm Systems".
 
-![Drag Racing](docs/img.png)
+![Homepage Image](docs/medic-infected-healthy.png)
 
 
 **INTRODUCTION**
