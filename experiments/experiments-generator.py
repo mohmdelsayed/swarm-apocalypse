@@ -14,6 +14,13 @@ import os
 import xml.etree.ElementTree as et 
 import shutil
 
+######################################################
+#############     HOW TO USE         #################
+######################################################
+# 1- Change the range in the for loop. Example -> for i in range (1,100)
+# 2- Make the variable you want to sweep equal to the counter i
+# 3- Change the output name of the folder generated (generated_experiments_MYPARAM_altered)
+
 #get the path where we are now
 base_path = os.path.dirname(os.path.realpath(__file__))
 # print (base_path)
@@ -113,4 +120,3 @@ for i in range(number_of_experiments):
     tree.write(new_file_name)
 
 print("Experiments Generated Successfully! ")
-
