@@ -121,7 +121,7 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
-  <visualization>
+  <!-- <visualization>
     <qt-opengl>
     <camera>
         <placement idx="0" position="0.0141579,1.9474,44.4915" look_at="0.0140583,1.89717,43.4928" up="-0.00198035,-0.998736,0.0502295" lens_focal_length="15" />
@@ -140,5 +140,5 @@
     <user_functions label="apocalypse_qt_user_functions" />
     </qt-opengl>
 
-  </visualization>
+  </visualization> -->
 </argos-configuration>
