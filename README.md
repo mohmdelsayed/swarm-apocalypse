@@ -1,7 +1,5 @@
 # swarm-apocalypse
 
-This is a private repo for the work of the paper "Decentralised  Control  of  Malware  Infection  Dissemination  inAutonomous  Agent  Swarm  Systems".
-
 ![Homepage Image](docs/medic-infected-healthy.png)
 
 
